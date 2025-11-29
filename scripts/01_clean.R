@@ -67,3 +67,61 @@ final_df <- clean_demographics %>%
 
 write_rds(final_df, "data/processed/final_df.rds")
 write_csv(final_df, "data/processed/final_df.csv")
+
+# ----------------------------------------
+# Lab subsets
+# ----------------------------------------
+
+# 1) METABOLIC LABS (HbA1c, Glucose, Insulin Resistance)
+metabolic_cols <- c(
+  "SEQN",
+  names(labs)[grepl("GHB|HbA1C|GLU|INS", names(labs), ignore.case = TRUE)]
+)
+
+metabolic_df <- final_df %>%
+  select(any_of(c("SEQN", "cog_impair", metabolic_cols))) %>%
+  drop_na(SEQN)
+
+write_csv(metabolic_df, "data/processed/metabolic_labs.csv")
+
+
+# 2) LIPID LABS (cholesterol, HDL, LDL, triglycerides)
+lipid_cols <- c(
+  names(labs)[grepl("TCHOL|HDL|TRIG|LDL", names(labs), ignore.case = TRUE)]
+)
+
+lipid_df <- final_df %>%
+  select(any_of(c("SEQN", "cog_impair", lipid_cols))) %>%
+  drop_na(SEQN)
+
+write_csv(lipid_df, "data/processed/lipid_labs.csv")
+
+
+# 3) CBC LABS (Complete Blood Count)
+cbc_cols <- names(labs)[grepl("CBC|WBC|RBC|HGB|HCT|PLT|MCV|MCH", names(labs), ignore.case = TRUE)]
+
+cbc_df <- final_df %>%
+  select(any_of(c("SEQN", "cog_impair", cbc_cols))) %>%
+  drop_na(SEQN)
+
+write_csv(cbc_df, "data/processed/cbc_labs.csv")
+
+
+# 4) VITAMINS LABS (Folate, B12, Vitamin D)
+vitamin_cols <- names(labs)[grepl("FOLATE|B12|VITD|VID", names(labs), ignore.case = TRUE)]
+
+vitamins_df <- final_df %>%
+  select(any_of(c("SEQN", "cog_impair", vitamin_cols))) %>%
+  drop_na(SEQN)
+
+write_csv(vitamins_df, "data/processed/vitamin_labs.csv")
+
+
+# 5) KIDNEY + LIVER LABS (Creatinine, Albumin, etc.)
+kidneyliver_cols <- names(labs)[grepl("ALB|CREAT|CR|AST|ALT|UREA", names(labs), ignore.case = TRUE)]
+
+kidneyliver_df <- final_df %>%
+  select(any_of(c("SEQN", "cog_impair", kidneyliver_cols))) %>%
+  drop_na(SEQN)
+
+write_csv(kidneyliver_df, "data/processed/kidneyliver_labs.csv")
