@@ -15,11 +15,13 @@ demographics_selection <- demo %>%
          education_level = DMDEDUC2,
          annual_income = INDHHIN2,
          marital_status = DMDMARTL)
-
+demographics_selection <- demographics_selection %>%
+  filter(!annual_income %in% c(77, 99))
 clean_demographics <- demographics_selection %>%
-  drop_na(age_years, gender, race, education_level)
+  drop_na(age_years, gender, race, education_level, annual_income)
 
-# plot these later
+
+# TO-DO: plot these in a separate file
 
 cog <- read_xpt('/Users/nityapowar/Desktop/MCI FYP/MCI-FYP/data/raw/CFQ_H.xpt')
 cog_core <- cog %>%
@@ -51,9 +53,10 @@ cog_impaired <- cog_core %>%
     cog_impair     = as.integer(impaired_dsst + impaired_aflu + impaired_cerad >= 1)
   )
 
-# add code for bias checks later
+# code for bias checks in the model file
 
 lab_files <- list.files('/Users/nityapowar/Desktop/MCI FYP/MCI-FYP/data/raw/LAB_DATA', pattern="\\.xpt$", full.names=TRUE)
+lab_files
 labs <- Reduce(function(x,y) full_join(x,y, by="SEQN"), lapply(lab_files, read_xpt)) %>%
   distinct(SEQN, .keep_all = TRUE)
 
@@ -69,7 +72,7 @@ write_rds(final_df, "data/processed/final_df.rds")
 write_csv(final_df, "data/processed/final_df.csv")
 
 # ----------------------------------------
-# Lab subsets
+# Lab subsets - for testing models behaviour and accuracy separately with single lab test
 # ----------------------------------------
 
 # 1) METABOLIC LABS (HbA1c, Glucose, Insulin Resistance)
