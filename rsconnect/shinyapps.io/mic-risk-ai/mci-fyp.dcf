@@ -1,0 +1,10 @@
+name: mci-fyp
+title:
+username: mic-risk-ai
+account: mic-risk-ai
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 16857791
+bundleId: 11687457
+url: https://mic-risk-ai.shinyapps.io/mci-fyp/
+version: 1

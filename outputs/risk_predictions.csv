@@ -1,0 +1,311 @@
+"Patient_ID","Probability","Risk_Band","Top_Features","Actual_MCI"
+1,0.556,"Medium","LBXVIDMS, LBXSCR, race",0
+2,0.374,"Low","LBXMMASI, LBXSTR, LBXPLTSI",0
+3,0.522,"Medium","age_years, LBXSGB, LBDHDD",1
+4,0.332,"Low","LBDHDDSI, age_years, LBDHDD",0
+5,0.66,"High","LBXMMASI, LBXPLTSI, LBXVIDMS",1
+6,0.204,"Low","LBXSBU, LBXGH, bmi",0
+7,0.536,"Medium","age_years, LBXHCT",1
+8,0.554,"Medium","age_years, LBXSGB, LBXRDW",1
+9,0.452,"Medium","weight, LBXRDW, LBXVIDMS",0
+10,0.728,"High","education_level, LBXSGB, LBXHCT",1
+11,0.446,"Medium","LBXSGB, LBXVIDMS, bmi",0
+12,0.32,"Low","LBXSCR, LBDHDD, LBXSGB",0
+13,0.46,"Medium","age_years, LBDHDDSI, LBDHDD",0
+14,0.402,"Medium","LBXSGB, LBXVIDMS, LBXGH",1
+15,0.61,"High","LBDHDDSI, LBDHDD, LBXGH",0
+16,0.504,"Medium","education_level, LBXVIDMS, LBXPLTSI",1
+17,0.242,"Low","age_years, weight, LBXSLDSI",0
+18,0.31,"Low","LBXSCR, LBXPLTSI, LBXSTR",0
+19,0.442,"Medium","LBXVIDMS, LBXNEPCT, LBXGH",1
+20,0.346,"Low","weight, bmi",1
+21,0.468,"Medium","LBXHCT, age_years, LBXPLTSI",0
+22,0.738,"High","age_years, LBXSGB, LBDHDDSI",1
+23,0.466,"Medium","education_level, mean_dbp, gender",0
+24,0.486,"Medium","LBXSGB, race, LBDHDD",0
+25,0.446,"Medium","LBXMMASI, waist, LBXSCR",0
+26,0.29,"Low","LBXSCR, LBXMC, LBXMCVSI",1
+27,0.736,"High","age_years, LBXMMASI, LBXSGB",1
+28,0.428,"Medium","LBXSGB, bmi, LBXSLDSI",1
+29,0.552,"Medium","LBDHDDSI, LBDHDD, mean_dbp",1
+30,0.558,"Medium","gender, phq9_depressed, LBXSGB",0
+31,0.274,"Low","phq9_depressed",0
+32,0.558,"Medium","age_years, LBDHDD, LBXSGB",1
+33,0.676,"High","education_level, age_years, LBXSGB",1
+34,0.252,"Low","LBXHCT, weight",0
+35,0.688,"High","gender, age_years, LBXSGB",1
+36,0.218,"Low","LBDHDDSI, LBDHDD, LBXMCVSI",1
+37,0.784,"High","phq9_depressed, education_level, phq9_sum",1
+38,0.256,"Low","mean_dbp, LBXSCR, LBDHDDSI",0
+39,0.366,"Low","LBXSGB, bmi, race",0
+40,0.724,"High","education_level, age_years, LBXMMASI",1
+41,0.202,"Low","",0
+42,0.418,"Medium","LBDHDDSI, LBXPLTSI, mean_dbp",1
+43,0.256,"Low","LBXSGB, LBDHDD, LBDHDDSI",0
+44,0.548,"Medium","LBXSGB, age_years, LBXSLDSI",0
+45,0.518,"Medium","LBXSGB, LBXVIDMS, LBXGH",0
+46,0.194,"Very Low","age_years, LBXPLTSI, mean_sbp",0
+47,0.318,"Low","LBDHDD, LBXSCR, LBXGH",1
+48,0.516,"Medium","LBXSGB, LBXSCR, race",1
+49,0.74,"High","education_level, LBXSGB, LBDHDD",1
+50,0.736,"High","education_level, LBXSGB, LBXHCT",1
+51,0.496,"Medium","age_years, LBDHDD, LBDHDDSI",0
+52,0.508,"Medium","age_years, LBXMC, LBXRDW",0
+53,0.66,"High","age_years, LBXSGB, LBXVIDMS",1
+54,0.664,"High","gender, age_years, LBXMMASI",1
+55,0.494,"Medium","gender, phq9_depressed, LBXSGB",1
+56,0.458,"Medium","LBXMMASI",1
+57,0.562,"Medium","LBXSGB, age_years, LBXPLTSI",1
+58,0.308,"Low","LBDHDD, phq9_sum, LBXPLTSI",0
+59,0.62,"High","age_years, gender, LBXPLTSI",1
+60,0.61,"High","LBXSGB, LBDHDDSI, LBXGH",0
+61,0.584,"Medium","education_level, gender, LBXSGB",1
+62,0.626,"High","LBXMMASI, mean_dbp, LBXVIDMS",0
+63,0.33,"Low","education_level, LBXRDW, LBXSCR",0
+64,0.224,"Low","LBXVIDMS",0
+65,0.204,"Low","LBDHDDSI, bmi, LBXSCR",0
+66,0.206,"Low","LBDHDD",0
+67,0.408,"Medium","height",0
+68,0.426,"Medium","LBXSGB, bmi, LBXMCVSI",0
+69,0.33,"Low","LBXSGB, gender, LBDHDD",0
+70,0.54,"Medium","education_level, gender, phq9_depressed",1
+71,0.734,"High","education_level, gender, LBXSGB",1
+72,0.652,"High","gender, education_level, LBXHCT",1
+73,0.408,"Medium","gender, LBXSGB, LBXVIDMS",0
+74,0.54,"Medium","LBXSGB, LBXRDW, LBXSCR",0
+75,0.768,"High","age_years, LBXRDW, LBXMC",0
+76,0.546,"Medium","age_years, LBXSGB, LBXPLTSI",0
+77,0.162,"Very Low","LBDHDDSI, LBDHDD",0
+78,0.416,"Medium","gender, LBXLYPCT, age_years",0
+79,0.376,"Low","LBXGH, LBXSCR, race",1
+80,0.598,"Medium","gender, LBXSGB, LBXRDW",1
+81,0.702,"High","education_level, LBXMMASI, LBXVIDMS",1
+82,0.44,"Medium","race, LBXSGB, LBXVIDMS",1
+83,0.532,"Medium","LBXSGB, race, LBXSCR",1
+84,0.314,"Low","phq9_depressed, age_years, phq9_sum",0
+85,0.482,"Medium","age_years, LBDB12, waist",1
+86,0.406,"Medium","race, age_years, bmi",0
+87,0.564,"Medium","age_years, LBDHDDSI, LBDHDD",0
+88,0.342,"Low","age_years, mean_dbp",0
+89,0.19,"Very Low","LBXPLTSI, LBXVIDMS, LBXLYPCT",0
+90,0.77,"High","education_level, LBXSGB, LBXVIDMS",1
+91,0.622,"High","education_level, LBDHDDSI, LBDHDD",0
+92,0.474,"Medium","LBXSGB, LBXRDW, LBXPLTSI",1
+93,0.82,"Very High","education_level, LBXHCT, LBDHDDSI",1
+94,0.396,"Low","bmi, LBXGH, waist",0
+95,0.38,"Low","age_years, mean_dbp",0
+96,0.408,"Medium","age_years, LBXSGB, LBXSCR",0
+97,0.318,"Low","LBXMC, LBXHCT, LBXSGB",0
+98,0.322,"Low","race, LBXVIDMS, bmi",0
+99,0.404,"Medium","LBXHCT, LBXMC, age_years",0
+100,0.7,"High","gender, LBXMMASI, LBXHCT",1
+101,0.516,"Medium","age_years, LBDHDDSI, LBXSLDSI",1
+102,0.532,"Medium","age_years, mean_dbp, LBXSGB",0
+103,0.748,"High","gender, age_years, LBXSCR",1
+104,0.644,"High","gender, age_years, bmi",0
+105,0.734,"High","education_level, phq9_depressed, LBXSGB",1
+106,0.662,"High","gender, LBXSGB, LBDHDD",0
+107,0.708,"High","LBXSGB, LBXSCR, weight",1
+108,0.528,"Medium","age_years, LBXVIDMS, LBXNEPCT",1
+109,0.382,"Low","gender, weight, mean_dbp",0
+110,0.374,"Low","weight, age_years, LBXVIDMS",1
+111,0.16,"Very Low","LBXVIDMS, LBXSGB, LBDB12",0
+112,0.744,"High","gender, education_level, LBXHCT",1
+113,0.278,"Low","LBXSCR, LBDHDDSI, LBDHDD",1
+114,0.446,"Medium","gender, LBXSGB, LBXMC",1
+115,0.382,"Low","LBXMMASI, LBXVIDMS, phq9_sum",0
+116,0.546,"Medium","LBDHDDSI, age_years, LBXVIDMS",1
+117,0.42,"Medium","age_years, race, LBXSGB",0
+118,0.466,"Medium","education_level, LBDHDDSI, LBXSGB",1
+119,0.44,"Medium","gender, LBXSCR, LBXMMASI",1
+120,0.76,"High","age_years, LBDHDDSI, LBDHDD",1
+121,0.368,"Low","LBXSGB, LBXVIDMS, LBXPLTSI",0
+122,0.454,"Medium","LBXSGB, LBXVIDMS, mean_sbp",1
+123,0.686,"High","education_level, LBDHDDSI, LBDHDD",1
+124,0.484,"Medium","LBXSGB, LBXPLTSI, LBXGH",0
+125,0.592,"Medium","age_years, LBXSTR, bmi",1
+126,0.19,"Very Low","LBXPLTSI",0
+127,0.276,"Low","phq9_depressed, phq9_sum, LBXMC",1
+128,0.414,"Medium","LBXSGB, LBXPLTSI",0
+129,0.696,"High","age_years, LBXSGB, LBXSCR",1
+130,0.712,"High","education_level, LBDHDD, LBDHDDSI",1
+131,0.274,"Low","age_years, LBXSTR",0
+132,0.258,"Low","phq9_sum, LBDHDDSI, LBDHDD",0
+133,0.806,"Very High","gender, education_level, LBXMMASI",0
+134,0.766,"High","education_level, age_years, LBXMMASI",1
+135,0.61,"High","age_years, bmi, LBXSTR",1
+136,0.512,"Medium","education_level, LBXSGB, LBXRDW",1
+137,0.232,"Low","LBXVIDMS, LBDHDDSI, LBDHDD",1
+138,0.442,"Medium","gender, LBXSGB, race",1
+139,0.548,"Medium","bmi, LBDHDDSI, LBDHDD",1
+140,0.222,"Low","LBXVIDMS",0
+141,0.392,"Low","LBXSGB, LBDHDD, LBXVIDMS",0
+142,0.588,"Medium","education_level, age_years, LBXPLTSI",1
+143,0.602,"High","age_years, LBXMMASI, gender",1
+144,0.706,"High","education_level, LBXVIDMS, LBDHDDSI",1
+145,0.714,"High","age_years, LBXSGB, LBDHDD",1
+146,0.276,"Low","LBXSTR, LBXPLTSI, LBDHDDSI",1
+147,0.51,"Medium","age_years, LBDHDD, LBDHDDSI",1
+148,0.16,"Very Low","",0
+149,0.394,"Low","race, LBXMC, LBXRDW",0
+150,0.506,"Medium","LBXSGB, weight, race",0
+151,0.684,"High","gender, age_years, LBXHCT",0
+152,0.48,"Medium","LBXSGB, race, age_years",0
+153,0.516,"Medium","age_years, gender, LBXRDW",0
+154,0.228,"Low","LBXHCT, LBXSCR, LBXGH",0
+155,0.184,"Very Low","",0
+156,0.332,"Low","phq9_sum, LBXSTR, LBDHDDSI",0
+157,0.36,"Low","race, LBXSCR, LBXGH",0
+158,0.608,"High","age_years, gender, LBXMMASI",1
+159,0.402,"Medium","LBXMMASI, LBXSCR",1
+160,0.616,"High","LBDHDDSI, age_years, LBXVIDMS",0
+161,0.66,"High","education_level, gender, age_years",0
+162,0.834,"Very High","gender, education_level, age_years",1
+163,0.232,"Low","LBDHDDSI, LBDHDD, age_years",1
+164,0.628,"High","age_years, LBDHDD, LBXSCR",1
+165,0.33,"Low","LBDHDDSI, LBDHDD, LBXPLTSI",0
+166,0.506,"Medium","LBXSGB, LBXRDW, race",0
+167,0.48,"Medium","phq9_sum, weight, mean_sbp",1
+168,0.58,"Medium","age_years, gender, phq9_depressed",0
+169,0.648,"High","education_level, gender, age_years",0
+170,0.348,"Low","LBDHDD, LBDHDDSI, LBXVIDMS",1
+171,0.4,"Low","LBXRDW, LBXMC, LBDHDDSI",0
+172,0.452,"Medium","gender, LBXSGB, LBXSBU",0
+173,0.29,"Low","LBXRDW, LBXHCT, LBXMMASI",0
+174,0.386,"Low","gender, LBXSGB, LBDB12",0
+175,0.742,"High","education_level, age_years, gender",1
+176,0.628,"High","education_level, age_years, LBXHCT",1
+177,0.38,"Low","LBDHDDSI, phq9_sum, LBDHDD",1
+178,0.288,"Low","race, LBXSGB, LBXSCR",1
+179,0.334,"Low","LBXSCR, LBXSGB, LBDHDD",0
+180,0.538,"Medium","education_level, gender, LBXMC",1
+181,0.304,"Low","LBXSGB, LBXGH, LBXSBU",0
+182,0.47,"Medium","LBXRDW, LBXPLTSI, race",1
+183,0.476,"Medium","age_years, gender, LBXSGB",1
+184,0.432,"Medium","age_years, LBXHCT, LBXRDW",0
+185,0.34,"Low","LBXSGB, gender",0
+186,0.46,"Medium","LBDHDDSI, age_years, LBXVIDMS",0
+187,0.542,"Medium","age_years, gender, bmi",0
+188,0.294,"Low","LBXSGB, LBXVIDMS, grip_strength",0
+189,0.526,"Medium","education_level, phq9_depressed, LBXVIDMS",0
+190,0.506,"Medium","LBXHCT, LBDHDDSI, race",1
+191,0.208,"Low","mean_dbp, bmi",0
+192,0.324,"Low","weight, LBDB12, LBXMCVSI",0
+193,0.668,"High","LBXSGB, race, LBDHDDSI",0
+194,0.296,"Low","mean_sbp, LBXMCVSI",0
+195,0.67,"High","age_years, LBXMMASI, LBXMC",1
+196,0.63,"High","phq9_depressed, phq9_sum, LBXSGB",1
+197,0.5,"Medium","education_level, age_years, LBXMMASI",0
+198,0.218,"Low","LBXHCT, LBXSTR, LBXSCR",0
+199,0.612,"High","education_level, age_years, LBXSGB",1
+200,0.646,"High","gender, age_years, LBXHCT",1
+201,0.458,"Medium","LBDHDD, LBDHDDSI, LBXRDW",0
+202,0.522,"Medium","education_level, LBXSGB, LBXVIDMS",1
+203,0.35,"Low","age_years, grip_strength",0
+204,0.37,"Low","bmi, race, gender",1
+205,0.496,"Medium","age_years, LBXPLTSI, phq9_sum",0
+206,0.588,"Medium","education_level, LBDHDDSI, LBXSCR",0
+207,0.322,"Low","gender, LBXSGB",0
+208,0.176,"Very Low","age_years, LBXSTR, LBXSCR",0
+209,0.214,"Low","LBXSTR, LBXSGB, height",0
+210,0.344,"Low","age_years, weight, LBXVIDMS",0
+211,0.614,"High","education_level, LBXRDW, LBDHDD",1
+212,0.74,"High","LBXHCT, LBXMC, LBDHDD",1
+213,0.442,"Medium","LBDHDDSI, LBXSTR, LBXGH",0
+214,0.254,"Low","LBXSTR, LBXPLTSI",0
+215,0.334,"Low","LBXPLTSI, LBXSGB",0
+216,0.378,"Low","LBXPLTSI, race, LBXSTR",0
+217,0.588,"Medium","education_level, LBDHDDSI, race",1
+218,0.412,"Medium","race, LBXSGB, bmi",0
+219,0.62,"High","age_years, LBXSGB, LBXSTR",1
+220,0.448,"Medium","LBXPLTSI, age_years, LBXMMASI",0
+221,0.532,"Medium","age_years, waist, LBXVIDMS",0
+222,0.286,"Low","LBDHDD, LBXVIDMS, LBXLYPCT",1
+223,0.69,"High","age_years, LBXSGB, LBXRDW",1
+224,0.11,"Very Low","waist",0
+225,0.492,"Medium","education_level, LBXHCT, bmi",1
+226,0.758,"High","gender, education_level, age_years",1
+227,0.39,"Low","LBXSGB, LBXMC, weight",0
+228,0.116,"Very Low","bmi",0
+229,0.528,"Medium","LBDHDDSI, LBXSGB, age_years",1
+230,0.778,"High","education_level, LBXSGB, LBXGH",1
+231,0.354,"Low","LBXVIDMS, LBDHDDSI",0
+232,0.562,"Medium","gender, LBXHCT, race",0
+233,0.568,"Medium","gender, education_level, phq9_sum",1
+234,0.428,"Medium","LBXHCT, gender, race",1
+235,0.82,"Very High","gender, age_years, LBXSGB",1
+236,0.386,"Low","age_years, bmi, LBXMC",1
+237,0.412,"Medium","LBXHCT, gender, LBXRDW",1
+238,0.346,"Low","LBXSGB, race",0
+239,0.568,"Medium","age_years, LBDHDDSI, LBDHDD",0
+240,0.23,"Low","bmi, LBXSGB",1
+241,0.85,"Very High","gender, education_level, age_years",1
+242,0.438,"Medium","LBDHDDSI, race, LBDHDD",1
+243,0.2,"Very Low","age_years",0
+244,0.78,"High","education_level, LBXSGB, LBDHDD",1
+245,0.604,"High","education_level, gender, LBXMMASI",0
+246,0.236,"Low","mean_dbp, mean_sbp",0
+247,0.626,"High","education_level, gender, LBXSGB",1
+248,0.444,"Medium","gender, race, LBXVIDMS",0
+249,0.29,"Low","mean_dbp, LBDHDDSI",0
+250,0.406,"Medium","gender, LBXSTR, weight",0
+251,0.262,"Low","gender",0
+252,0.566,"Medium","education_level, age_years, bmi",1
+253,0.264,"Low","LBXSGB, LBXPLTSI",0
+254,0.538,"Medium","age_years, gender, mean_dbp",0
+255,0.54,"Medium","age_years, LBXSGB, mean_dbp",1
+256,0.556,"Medium","age_years, LBDHDDSI, bmi",1
+257,0.374,"Low","LBDHDDSI, LBDHDD, LBXGH",0
+258,0.564,"Medium","age_years, LBXSGB, LBXPLTSI",1
+259,0.376,"Low","age_years, LBXMMASI, LBXSTR",0
+260,0.448,"Medium","LBXSGB, LBDHDD, LBXVIDMS",0
+261,0.376,"Low","LBXPLTSI, weight, bmi",1
+262,0.482,"Medium","LBXSGB, LBDHDD, LBDHDDSI",1
+263,0.422,"Medium","LBXSTR, LBXPLTSI, age_years",1
+264,0.596,"Medium","age_years, LBXHCT, LBDHDDSI",1
+265,0.592,"Medium","age_years, LBXSLDSI, LBDHDDSI",0
+266,0.856,"Very High","education_level, LBXSGB, race",1
+267,0.518,"Medium","education_level, LBXVIDMS, LBXSCR",1
+268,0.72,"High","education_level, gender, phq9_depressed",1
+269,0.506,"Medium","education_level, LBDHDDSI, LBDHDD",1
+270,0.732,"High","gender, education_level, mean_dbp",0
+271,0.368,"Low","gender, LBXVIDMS, LBXSGB",0
+272,0.55,"Medium","LBDHDDSI, LBDHDD, LBXSCR",0
+273,0.638,"High","age_years, LBXSGB, LBXRDW",1
+274,0.204,"Low","LBXSCR, mean_dbp",1
+275,0.528,"Medium","education_level, LBXSCR, LBXPLTSI",0
+276,0.296,"Low","",0
+277,0.562,"Medium","gender, race, age_years",1
+278,0.456,"Medium","LBXMMASI, LBXSCR, LBDHDDSI",1
+279,0.622,"High","LBXSGB, age_years, LBDHDDSI",1
+280,0.386,"Low","LBXSGB, LBXRDW, bmi",0
+281,0.316,"Low","LBXSGB, LBXSCR",0
+282,0.682,"High","age_years, weight, mean_sbp",1
+283,0.622,"High","LBDHDD, age_years, LBXSGB",1
+284,0.224,"Low","LBXMC, LBXMOPCT, age_years",0
+285,0.408,"Medium","bmi, LBXVIDMS, LBXSLDSI",0
+286,0.486,"Medium","age_years, gender, LBXSGB",1
+287,0.116,"Very Low","LBXMOPCT",0
+288,0.39,"Low","mean_dbp, LBXRDW, grip_strength",0
+289,0.738,"High","phq9_depressed, education_level, LBXSGB",1
+290,0.662,"High","education_level, LBXMCVSI, LBDHDDSI",1
+291,0.734,"High","age_years, LBXSGB, LBXSTR",1
+292,0.786,"High","education_level, gender, age_years",1
+293,0.46,"Medium","age_years, gender, mean_dbp",1
+294,0.584,"Medium","education_level, age_years, LBXVIDMS",0
+295,0.562,"Medium","age_years, gender, LBXSGB",1
+296,0.362,"Low","LBXNEPCT, LBXSTR, LBXVIDMS",0
+297,0.488,"Medium","LBDHDDSI",1
+298,0.47,"Medium","education_level, gender, LBXHCT",1
+299,0.71,"High","education_level, age_years, gender",1
+300,0.63,"High","education_level, gender, LBXSGB",0
+301,0.61,"High","age_years, LBXSGB, LBXRDW",1
+302,0.206,"Low","bmi, LBXSBU",0
+303,0.882,"Very High","gender, education_level, LBXHCT",1
+304,0.518,"Medium","LBXMMASI, LBXSGB, LBXSCR",1
+305,0.732,"High","education_level, age_years, gender",1
+306,0.474,"Medium","education_level, LBXPLTSI, LBDHDDSI",1
+307,0.482,"Medium","LBXSGB, race, LBDHDDSI",1
+308,0.57,"Medium","age_years, LBDHDDSI, LBDHDD",1
+309,0.622,"High","age_years, LBXSCR, LBDHDD",1
+310,0.566,"Medium","education_level, LBXSGB, LBDHDDSI",1
