@@ -11,7 +11,7 @@
 
 
 
-<title>EXPERIMENT_TRACKER</title>
+<title>TEMP_FEATURE_KEEP_REMOVE_TRACKER</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -352,1367 +352,177 @@ display: none;
 </div>
 
 
-<div id="experiment-tracker" class="section level1">
-<h1>Experiment Tracker</h1>
-<p>Use this file to record all model experiments consistently.</p>
-<div id="how-to-use" class="section level2">
-<h2>How to use</h2>
-<ul>
-<li>Keep one row per experiment run.</li>
-<li>Use one section for experiments before resampling and one for after
-resampling.</li>
-<li>Keep calibration, risk percentage, SHAP, and LIME results outside
-this table unless the model is the final selected model.</li>
-</ul>
+<div id="sssnfl_h.xpt" class="section level2">
+<h2>1. SSSNFL_H.xpt</h2>
+<p>Kept: - <code>SSSNFL</code> - Serum neurofilament light chain (pg/ml)
+- NfL, marker of neuro-axonal injury</p>
+<p>Removed: - <code>WTSSNH2Y</code> - SSSNFL_H 2 year weights -
+<code>SSNFLH</code> - Serum neurofilament above detect limit -
+<code>SSNFLL</code> - Serum neurofilament below detect limit</p>
 </div>
-<div id="section-1-before-resampling" class="section level2">
-<h2>Section 1: Before Resampling</h2>
-<p>All runs below use the same preprocessing cutoff: remove columns with
-<code>&gt;=60%</code> missing values before modeling. It also uses class
-weights- giving more weight to FN, so missing MCI is penalised</p>
-<table style="width:100%;">
-<colgroup>
-<col width="3%" />
-<col width="3%" />
-<col width="3%" />
-<col width="3%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
-<col width="3%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Exp ID</th>
-<th>Data Version</th>
-<th>Feature Set</th>
-<th>Model</th>
-<th align="right">Class Threshold</th>
-<th align="right">Train Size</th>
-<th align="right">Test Size</th>
-<th align="right">MCI % Train</th>
-<th align="right">MCI % Test</th>
-<th align="right">Accuracy</th>
-<th align="right">Precision</th>
-<th align="right">Recall</th>
-<th align="right">Specificity</th>
-<th align="right">F1</th>
-<th align="right">ROC-AUC</th>
-<th align="right">Log Loss</th>
-<th align="right">TP</th>
-<th align="right">FP</th>
-<th align="right">TN</th>
-<th align="right">FN</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>B1</td>
-<td><code>cleaned_data_for_modeling.RData</code></td>
-<td>cleaned full feature set (<code>68</code> vars)</td>
-<td>Random Forest</td>
-<td align="right">best_t = 0.507</td>
-<td align="right">1243</td>
-<td align="right">310</td>
-<td align="right">50.1</td>
-<td align="right">50.0</td>
-<td align="right">0.713</td>
-<td align="right">0.750</td>
-<td align="right">0.639</td>
-<td align="right">0.787</td>
-<td align="right">0.690</td>
-<td align="right">0.765</td>
-<td align="right"></td>
-<td align="right">99</td>
-<td align="right">33</td>
-<td align="right">122</td>
-<td align="right">56</td>
-<td>optimal <code>mtry=4</code>; <code>ntree=500</code>;
-type=<code>classification</code>; variables tried at each
-split=<code>4</code>; OOB error=<code>0.3500</code> (35.0%); OOB class
-error <code>No_MCI=0.3435</code>, <code>MCI=0.3563</code>; class weights
-<code>1.0/1.5</code>; best_t from CV=<code>0.507</code>; accuracy at
-<code>0.50=0.7097</code></td>
-</tr>
-<tr class="even">
-<td>B2</td>
-<td><code>cleaned_data_for_modeling.RData</code></td>
-<td>cleaned full feature set (<code>68</code> vars)</td>
-<td>XGBoost</td>
-<td align="right">best_t = 0.6432</td>
-<td align="right">1243</td>
-<td align="right">310</td>
-<td align="right">50.1</td>
-<td align="right">50.0</td>
-<td align="right">0.681</td>
-<td align="right">0.755</td>
-<td align="right">0.535</td>
-<td align="right">0.826</td>
-<td align="right">0.626</td>
-<td align="right">0.766</td>
-<td align="right">0.4757</td>
-<td align="right">83</td>
-<td align="right">27</td>
-<td align="right">128</td>
-<td align="right">72</td>
-<td>best_nrounds=<code>45</code>;
-objective=<code>binary:logistic</code>;
-eval_metric=<code>logloss</code>; lambda=<code>1</code>;
-seed=<code>123</code>; max_depth=<code>3</code>; eta=<code>0.1</code>;
-subsample=<code>0.8</code>; colsample_bytree=<code>0.8</code>;
-min_child_weight=<code>3</code>; gamma=<code>0.1</code>; CV mean
-logloss=<code>0.5734</code>; CV SD=<code>0.0094</code>; CV
-variance=<code>0.00009</code>; best_t from CV=<code>0.6432</code>;
-accuracy at <code>0.50=0.6613</code>; train logloss=<code>0.4757</code>;
-train acc=<code>0.7989</code>; train confusion matrix
-TN=<code>423</code>, FN=<code>53</code>, FP=<code>197</code>,
-TP=<code>570</code></td>
-</tr>
-<tr class="odd">
-<td>B3</td>
-<td><code>cleaned_data_for_modeling.RData</code></td>
-<td>reduced feature set (<code>24</code> vars: <code>10</code> labs +
-<code>5</code> demographics + <code>9</code> physical/examination
-vars)</td>
-<td>Random Forest</td>
-<td align="right">best_t = 0.461</td>
-<td align="right">1243</td>
-<td align="right">310</td>
-<td align="right">50.1</td>
-<td align="right">50.0</td>
-<td align="right">0.684</td>
-<td align="right">0.659</td>
-<td align="right">0.761</td>
-<td align="right">0.606</td>
-<td align="right">0.707</td>
-<td align="right">0.758</td>
-<td align="right"></td>
-<td align="right">118</td>
-<td align="right">61</td>
-<td align="right">94</td>
-<td align="right">37</td>
-<td>optimal <code>mtry=2</code>; <code>ntree=500</code>;
-type=<code>classification</code>; variables tried at each
-split=<code>2</code>; OOB error=<code>0.3459</code> (34.59%); OOB class
-error <code>No_MCI=0.3484</code>, <code>MCI=0.3435</code>; class weights
-<code>1.0/1.5</code>; best_t from CV=<code>0.461</code>; accuracy at
-<code>0.50=0.6871</code></td>
-</tr>
-<tr class="even">
-<td>B4</td>
-<td><code>cleaned_data_for_modeling.RData</code></td>
-<td>reduced feature set (<code>44</code> vars: <code>30</code> labs +
-<code>5</code> demographics + <code>9</code> physical/examination
-vars)</td>
-<td>XGBoost</td>
-<td align="right">best_t = 0.5428</td>
-<td align="right">1243</td>
-<td align="right">310</td>
-<td align="right">50.1</td>
-<td align="right">50.0</td>
-<td align="right">0.706</td>
-<td align="right">0.703</td>
-<td align="right">0.716</td>
-<td align="right">0.697</td>
-<td align="right">0.709</td>
-<td align="right">0.776</td>
-<td align="right">0.4752</td>
-<td align="right">111</td>
-<td align="right">47</td>
-<td align="right">108</td>
-<td align="right">44</td>
-<td>best_nrounds=<code>51</code>;
-objective=<code>binary:logistic</code>;
-eval_metric=<code>logloss</code>; lambda=<code>1</code>;
-seed=<code>123</code>; max_depth=<code>3</code>; eta=<code>0.1</code>;
-subsample=<code>0.8</code>; colsample_bytree=<code>0.8</code>;
-min_child_weight=<code>3</code>; gamma=<code>0</code>; CV mean
-logloss=<code>0.5711</code>; CV SD=<code>0.0220</code>; CV
-variance=<code>0.00049</code>; best_t from CV=<code>0.5428</code>;
-accuracy at <code>0.50=0.6839</code>; train logloss=<code>0.4752</code>;
-train acc=<code>0.7844</code>; train confusion matrix
-TN=<code>414</code>, FN=<code>62</code>, FP=<code>206</code>,
-TP=<code>561</code></td>
-</tr>
-</tbody>
-</table>
-<div id="reduced-rf-comparison" class="section level3">
-<h3>Reduced RF Comparison</h3>
-<p>Use this table to choose the reduced-feature-set size for Random
-Forest. All runs use <code>14</code> fixed demographic/examination
-variables plus the stated number of top lab features.</p>
-<table>
-<colgroup>
-<col width="6%" />
-<col width="8%" />
-<col width="8%" />
-<col width="8%" />
-<col width="8%" />
-<col width="8%" />
-<col width="8%" />
-<col width="8%" />
-<col width="8%" />
-<col width="8%" />
-<col width="8%" />
-<col width="8%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Lab Features Kept</th>
-<th align="right">Total Features</th>
-<th align="right">Accuracy</th>
-<th align="right">Precision</th>
-<th align="right">Recall</th>
-<th align="right">Specificity</th>
-<th align="right">F1</th>
-<th align="right">ROC-AUC</th>
-<th align="right">TP</th>
-<th align="right">FP</th>
-<th align="right">TN</th>
-<th align="right">FN</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Top 40 labs</td>
-<td align="right">54</td>
-<td align="right">0.684</td>
-<td align="right">0.694</td>
-<td align="right">0.658</td>
-<td align="right">0.710</td>
-<td align="right">0.675</td>
-<td align="right">0.768</td>
-<td align="right">102</td>
-<td align="right">45</td>
-<td align="right">110</td>
-<td align="right">53</td>
-</tr>
-<tr class="even">
-<td>Top 30 labs</td>
-<td align="right">44</td>
-<td align="right">0.668</td>
-<td align="right">0.653</td>
-<td align="right">0.716</td>
-<td align="right">0.619</td>
-<td align="right">0.683</td>
-<td align="right">0.763</td>
-<td align="right">111</td>
-<td align="right">59</td>
-<td align="right">96</td>
-<td align="right">44</td>
-</tr>
-<tr class="odd">
-<td>Top 20 labs</td>
-<td align="right">34</td>
-<td align="right">0.681</td>
-<td align="right">0.689</td>
-<td align="right">0.658</td>
-<td align="right">0.703</td>
-<td align="right">0.673</td>
-<td align="right">0.769</td>
-<td align="right">102</td>
-<td align="right">46</td>
-<td align="right">109</td>
-<td align="right">53</td>
-</tr>
-<tr class="even">
-<td>Top 10 labs</td>
-<td align="right">24</td>
-<td align="right">0.684</td>
-<td align="right">0.659</td>
-<td align="right">0.761</td>
-<td align="right">0.606</td>
-<td align="right">0.707</td>
-<td align="right">0.758</td>
-<td align="right">118</td>
-<td align="right">61</td>
-<td align="right">94</td>
-<td align="right">37</td>
-</tr>
-</tbody>
-</table>
+<div id="ghb_h.xpt" class="section level2">
+<h2>2. GHB_H.xpt</h2>
+<p>Kept: - <code>LBXGH</code> - Glycohemoglobin (%) - HbA1c</p>
 </div>
-<div id="reduced-xgb-comparison" class="section level3">
-<h3>Reduced XGB Comparison</h3>
-<p>Use this table to choose the reduced-feature-set size for XGBoost.
-All runs use <code>14</code> fixed demographic/examination variables
-plus the stated number of top lab features.</p>
-<table>
-<colgroup>
-<col width="6%" />
-<col width="8%" />
-<col width="8%" />
-<col width="8%" />
-<col width="8%" />
-<col width="8%" />
-<col width="8%" />
-<col width="8%" />
-<col width="8%" />
-<col width="8%" />
-<col width="8%" />
-<col width="8%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Lab Features Kept</th>
-<th align="right">Total Features</th>
-<th align="right">Accuracy</th>
-<th align="right">Precision</th>
-<th align="right">Recall</th>
-<th align="right">Specificity</th>
-<th align="right">F1</th>
-<th align="right">ROC-AUC</th>
-<th align="right">TP</th>
-<th align="right">FP</th>
-<th align="right">TN</th>
-<th align="right">FN</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Top 40 labs</td>
-<td align="right">54</td>
-<td align="right">0.671</td>
-<td align="right">0.779</td>
-<td align="right">0.477</td>
-<td align="right">0.865</td>
-<td align="right">0.592</td>
-<td align="right">0.761</td>
-<td align="right">74</td>
-<td align="right">21</td>
-<td align="right">134</td>
-<td align="right">81</td>
-</tr>
-<tr class="even">
-<td>Top 30 labs</td>
-<td align="right">44</td>
-<td align="right">0.706</td>
-<td align="right">0.703</td>
-<td align="right">0.716</td>
-<td align="right">0.697</td>
-<td align="right">0.709</td>
-<td align="right">0.776</td>
-<td align="right">111</td>
-<td align="right">47</td>
-<td align="right">108</td>
-<td align="right">44</td>
-</tr>
-<tr class="odd">
-<td>Top 20 labs</td>
-<td align="right">34</td>
-<td align="right">0.687</td>
-<td align="right">0.730</td>
-<td align="right">0.594</td>
-<td align="right">0.781</td>
-<td align="right">0.655</td>
-<td align="right">0.770</td>
-<td align="right">92</td>
-<td align="right">34</td>
-<td align="right">121</td>
-<td align="right">63</td>
-</tr>
-<tr class="even">
-<td>Top 10 labs</td>
-<td align="right">24</td>
-<td align="right">0.700</td>
-<td align="right">0.725</td>
-<td align="right">0.645</td>
-<td align="right">0.755</td>
-<td align="right">0.683</td>
-<td align="right">0.777</td>
-<td align="right">100</td>
-<td align="right">38</td>
-<td align="right">117</td>
-<td align="right">55</td>
-</tr>
-</tbody>
-</table>
+<div id="mma_h.xpt" class="section level2">
+<h2>3. MMA_H.xpt</h2>
+<p>Kept: - <code>LBXMMASI</code> - Methylmalonic Acid (nmol/L) - marker
+related to vitamin B12 deficiency</p>
+<p>Removed: - <code>LBDMMALC</code> - Methylmalonic Acid comment
+code</p>
 </div>
-<div id="section-1a-fairness-comparison-before-resampling" class="section level3">
-<h3>Section 1A: Fairness Comparison Before Resampling</h3>
-<p>Use this table to compare subgroup fairness for the main baseline
-models before making any resampling decision. Enter paired values in the
-same cell as <code>B1 / B2</code>.</p>
-<table>
-<colgroup>
-<col width="8%" />
-<col width="11%" />
-<col width="11%" />
-<col width="11%" />
-<col width="8%" />
-<col width="8%" />
-<col width="8%" />
-<col width="8%" />
-<col width="8%" />
-<col width="8%" />
-<col width="8%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Demographic Group</th>
-<th align="right">Total</th>
-<th align="right">MCI</th>
-<th align="right">No MCI</th>
-<th>Selection (B1 / B2)</th>
-<th>TPR (B1 / B2)</th>
-<th>FPR (B1 / B2)</th>
-<th>DPD (B1 / B2)</th>
-<th>EOD (B1 / B2)</th>
-<th>Fairness Issue</th>
-<th>Resample?</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Age: 60-64</td>
-<td align="right">101</td>
-<td align="right">33</td>
-<td align="right">68</td>
-<td>0.248 / 0.139</td>
-<td>0.515 / 0.273</td>
-<td>0.118 / 0.0735</td>
-<td>0.566 / 0.652</td>
-<td>0.487 / 0.610</td>
-<td>Under-selected</td>
-<td>No</td>
-</tr>
-<tr class="even">
-<td>Age: 65-69</td>
-<td align="right">72</td>
-<td align="right">40</td>
-<td align="right">32</td>
-<td>0.361 / 0.236</td>
-<td>0.425 / 0.350</td>
-<td>0.281 / 0.0938</td>
-<td>0.566 / 0.652</td>
-<td>0.487 / 0.610</td>
-<td>Consistent under-detection</td>
-<td>Yes</td>
-</tr>
-<tr class="odd">
-<td>Age: 70-74</td>
-<td align="right">56</td>
-<td align="right">27</td>
-<td align="right">29</td>
-<td>0.446 / 0.500</td>
-<td>0.667 / 0.667</td>
-<td>0.241 / 0.345</td>
-<td>0.566 / 0.652</td>
-<td>0.487 / 0.610</td>
-<td>Higher false positives</td>
-<td>No</td>
-</tr>
-<tr class="even">
-<td>Age: 75-79</td>
-<td align="right">38</td>
-<td align="right">21</td>
-<td align="right">17</td>
-<td>0.553 / 0.447</td>
-<td>0.762 / 0.571</td>
-<td>0.294 / 0.294</td>
-<td>0.566 / 0.652</td>
-<td>0.487 / 0.610</td>
-<td>High false positives</td>
-<td>No</td>
-</tr>
-<tr class="odd">
-<td>Age: 80+</td>
-<td align="right">43</td>
-<td align="right">34</td>
-<td align="right">9</td>
-<td>0.814 / 0.791</td>
-<td>0.912 / 0.882</td>
-<td>0.444 / 0.444</td>
-<td>0.566 / 0.652</td>
-<td>0.487 / 0.610</td>
-<td>Over-selection / high FPR</td>
-<td>No</td>
-</tr>
-<tr class="even">
-<td>Education: Level 1</td>
-<td align="right">25</td>
-<td align="right">23</td>
-<td align="right">2</td>
-<td>0.920 / 0.920</td>
-<td>0.913 / 0.913</td>
-<td>1.000 / 1.000</td>
-<td>0.711 / 0.799</td>
-<td>0.572 / 0.694</td>
-<td>Extreme over-selection</td>
-<td>No</td>
-</tr>
-<tr class="odd">
-<td>Education: Level 2</td>
-<td align="right">41</td>
-<td align="right">29</td>
-<td align="right">12</td>
-<td>0.732 / 0.659</td>
-<td>0.862 / 0.690</td>
-<td>0.417 / 0.583</td>
-<td>0.711 / 0.799</td>
-<td>0.572 / 0.694</td>
-<td>High false positives</td>
-<td>No</td>
-</tr>
-<tr class="even">
-<td>Education: Level 3</td>
-<td align="right">78</td>
-<td align="right">40</td>
-<td align="right">38</td>
-<td>0.526 / 0.449</td>
-<td>0.675 / 0.600</td>
-<td>0.368 / 0.289</td>
-<td>0.711 / 0.799</td>
-<td>0.572 / 0.694</td>
-<td>Higher false positives</td>
-<td>No</td>
-</tr>
-<tr class="odd">
-<td>Education: Level 4</td>
-<td align="right">91</td>
-<td align="right">41</td>
-<td align="right">50</td>
-<td>0.209 / 0.121</td>
-<td>0.341 / 0.220</td>
-<td>0.100 / 0.0400</td>
-<td>0.711 / 0.799</td>
-<td>0.572 / 0.694</td>
-<td>Severe under-detection</td>
-<td>Yes</td>
-</tr>
-<tr class="even">
-<td>Education: Level 5</td>
-<td align="right">75</td>
-<td align="right">22</td>
-<td align="right">53</td>
-<td>0.253 / 0.187</td>
-<td>0.545 / 0.409</td>
-<td>0.132 / 0.0943</td>
-<td>0.711 / 0.799</td>
-<td>0.572 / 0.694</td>
-<td>Under-detection</td>
-<td>Yes</td>
-</tr>
-<tr class="odd">
-<td>Gender: Male</td>
-<td align="right">163</td>
-<td align="right">91</td>
-<td align="right">72</td>
-<td>0.460 / 0.399</td>
-<td>0.648 / 0.538</td>
-<td>0.222 / 0.222</td>
-<td>0.072 / 0.093</td>
-<td>0.023 / 0.007</td>
-<td>No major issue</td>
-<td>No</td>
-</tr>
-<tr class="even">
-<td>Gender: Female</td>
-<td align="right">147</td>
-<td align="right">64</td>
-<td align="right">83</td>
-<td>0.388 / 0.306</td>
-<td>0.625 / 0.531</td>
-<td>0.205 / 0.133</td>
-<td>0.072 / 0.093</td>
-<td>0.023 / 0.007</td>
-<td>No major issue</td>
-<td>No</td>
-</tr>
-<tr class="odd">
-<td>Race: Group 1</td>
-<td align="right">41</td>
-<td align="right">17</td>
-<td align="right">24</td>
-<td>0.537 / 0.366</td>
-<td>0.824 / 0.529</td>
-<td>0.333 / 0.250</td>
-<td>0.182 / 0.204</td>
-<td>0.439 / 0.205</td>
-<td>Relatively favored group</td>
-<td>No</td>
-</tr>
-<tr class="even">
-<td>Race: Group 2</td>
-<td align="right">24</td>
-<td align="right">17</td>
-<td align="right">7</td>
-<td>0.542 / 0.417</td>
-<td>0.647 / 0.529</td>
-<td>0.286 / 0.143</td>
-<td>0.182 / 0.204</td>
-<td>0.439 / 0.205</td>
-<td>High selection relative to others</td>
-<td>No</td>
-</tr>
-<tr class="odd">
-<td>Race: Group 3</td>
-<td align="right">162</td>
-<td align="right">69</td>
-<td align="right">93</td>
-<td>0.370 / 0.296</td>
-<td>0.667 / 0.536</td>
-<td>0.151 / 0.118</td>
-<td>0.182 / 0.204</td>
-<td>0.439 / 0.205</td>
-<td>Mild under-selection</td>
-<td>No</td>
-</tr>
-<tr class="even">
-<td>Race: Group 4</td>
-<td align="right">58</td>
-<td align="right">39</td>
-<td align="right">19</td>
-<td>0.483 / 0.500</td>
-<td>0.590 / 0.590</td>
-<td>0.263 / 0.316</td>
-<td>0.182 / 0.204</td>
-<td>0.439 / 0.205</td>
-<td>Higher false positives</td>
-<td>No</td>
-</tr>
-<tr class="odd">
-<td>Race: Group 5</td>
-<td align="right">25</td>
-<td align="right">13</td>
-<td align="right">12</td>
-<td>0.360 / 0.320</td>
-<td>0.385 / 0.385</td>
-<td>0.333 / 0.250</td>
-<td>0.182 / 0.204</td>
-<td>0.439 / 0.205</td>
-<td>Lowest TPR / unstable</td>
-<td>No</td>
-</tr>
-<tr class="even">
-<td>Marital: Married</td>
-<td align="right">175</td>
-<td align="right">83</td>
-<td align="right">92</td>
-<td>0.423 / 0.349</td>
-<td>0.651 / 0.530</td>
-<td>0.217 / 0.185</td>
-<td>0.291 / 0.371</td>
-<td>0.467 / 0.544</td>
-<td>No major issue</td>
-<td>No</td>
-</tr>
-<tr class="odd">
-<td>Marital: Widowed</td>
-<td align="right">56</td>
-<td align="right">30</td>
-<td align="right">26</td>
-<td>0.571 / 0.518</td>
-<td>0.800 / 0.767</td>
-<td>0.308 / 0.231</td>
-<td>0.291 / 0.371</td>
-<td>0.467 / 0.544</td>
-<td>Relatively favored group</td>
-<td>No</td>
-</tr>
-<tr class="even">
-<td>Marital: Divorced</td>
-<td align="right">50</td>
-<td align="right">24</td>
-<td align="right">26</td>
-<td>0.280 / 0.200</td>
-<td>0.500 / 0.417</td>
-<td>0.0769 / 0.000</td>
-<td>0.291 / 0.371</td>
-<td>0.467 / 0.544</td>
-<td>Lower selection</td>
-<td>No</td>
-</tr>
-<tr class="odd">
-<td>Marital: Separated</td>
-<td align="right">7</td>
-<td align="right">4</td>
-<td align="right">3</td>
-<td>0.571 / 0.571</td>
-<td>0.750 / 0.500</td>
-<td>0.333 / 0.667</td>
-<td>0.291 / 0.371</td>
-<td>0.467 / 0.544</td>
-<td>Small group / unstable</td>
-<td>No</td>
-</tr>
-<tr class="even">
-<td>Marital: Never married</td>
-<td align="right">16</td>
-<td align="right">9</td>
-<td align="right">7</td>
-<td>0.312 / 0.250</td>
-<td>0.333 / 0.222</td>
-<td>0.286 / 0.286</td>
-<td>0.291 / 0.371</td>
-<td>0.467 / 0.544</td>
-<td>Under-detection but small group</td>
-<td>No</td>
-</tr>
-<tr class="odd">
-<td>Marital: Living with partner</td>
-<td align="right">6</td>
-<td align="right">5</td>
-<td align="right">1</td>
-<td>0.500 / 0.333</td>
-<td>0.600 / 0.400</td>
-<td>0.000 / 0.000</td>
-<td>0.291 / 0.371</td>
-<td>0.467 / 0.544</td>
-<td>Very small group / unstable</td>
-<td>No</td>
-</tr>
-</tbody>
-</table>
+<div id="vitb12_h.xpt" class="section level2">
+<h2>4. VITB12_H.xpt</h2>
+<p>Kept: - <code>LBDB12SI</code> - Vitamin B12 (pmol/L) - vitamin B12
+status</p>
+<p>Removed: - <code>LBDB12</code> - Vitamin B12 (pg/mL)</p>
 </div>
-<div id="top-features" class="section level3">
-<h3>Top Features</h3>
-<table>
-<colgroup>
-<col width="33%" />
-<col width="33%" />
-<col width="33%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Exp ID</th>
-<th>Importance Metric</th>
-<th>Top Features</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>B1</td>
-<td>Mean Decrease Gini</td>
-<td>education_level, age_years, LBDBCDSI, LBDTCSI, LBDHDDSI, LBDSCRSI,
-LBDSGBSI, URDACT, grip_strength, LBXMMASI, LBXVIDMS, height, LBDGLUSI,
-weight, LBDTRSI, mean_dbp, LBXHCT, LBXPLTSI, LBXRDW, LBXHGB, LBDRFOSI,
-LBXVE3MS, LBDB12SI, LBDLDLSI, waist, mean_sbp, LBXSATSI, bmi, LBDSIRSI,
-LBXLYPCT, LBDBPBSI, LBXMCVSI, LBXGH, LBXMOPCT, LBDINSI, LBDBSESI,
-LBXRBCSI, LBXMCHSI, LBXNEPCT, LBDBMNSI, LBXSAPSI, LBDTHGSI, LBDSUASI,
-LBXWBCSI, LBXSGTSI, LBDSTPSI, LBDNENO, LBXMC, LBXMPSI, LBDLYMNO</td>
-</tr>
-<tr class="even">
-<td>B2</td>
-<td>XGBoost importance</td>
-<td>education_level, age_years, race, LBDSGBSI, LBXMMASI, LBDHDDSI,
-LBDBCDSI, phq9_sum, LBDTCSI, LBDTRSI, LBDSCRSI, LBXHGB, LBXPLTSI,
-URDACT, grip_strength, LBXSATSI, height, gender, bmi, LBDB12SI,
-LBXVIDMS, LBDGLUSI, LBXVE3MS, LBDSIRSI, LBXRDW, mean_sbp, LBXGH,
-LBXLYPCT, LBDSBUSI, LBDLDLSI, LBXMOPCT, LBDSALSI, LBDSPHSI, LBXMCVSI,
-LBXMPSI, LBXRBCSI, LBDBSESI, LBDSUASI, waist, LBXHCT, LBDLYMNO, weight,
-LBDINSI, LBXNEPCT, LBXSAPSI, LBDRFOSI, LBXSOSSI, LBDBMNSI, LBDSTPSI,
-LBXSGTSI, LBDBPBSI</td>
-</tr>
-<tr class="odd">
-<td>B3</td>
-<td>Mean Decrease Gini</td>
-<td>age_years, education_level, LBDTCSI, URDACT, LBXMMASI, LBDSCRSI,
-LBDSGBSI, grip_strength, height, LBXVIDMS, mean_sbp, mean_dbp, LBDHDDSI,
-LBDBCDSI, LBDGLUSI, LBDTRSI, bmi, waist, weight, phq9_sum, race,
-marital_status, gender, phq9_depressed</td>
-</tr>
-<tr class="even">
-<td>B4</td>
-<td>XGBoost importance</td>
-<td>education_level, age_years, race, LBXMMASI, LBDSGBSI, LBDHDDSI,
-LBDTCSI, phq9_sum, LBXHGB, LBDB12SI, LBXPLTSI, LBDSCRSI, gender,
-LBXLYPCT, LBXSATSI, LBXVE3MS, bmi, LBDSALSI, LBDGLUSI, LBXVIDMS, LBXHCT,
-height, grip_strength, LBDLDLSI, LBXMCVSI, URDACT, LBXRBCSI, LBDSIRSI,
-weight, LBDBSESI, LBXRDW, LBDSUASI, LBDSBUSI, mean_sbp, waist, LBDTRSI,
-LBXGH, mean_dbp, LBDSPHSI, LBXMPSI, LBXMOPCT, LBDBCDSI</td>
-</tr>
-</tbody>
-</table>
+<div id="glu_h.xpt" class="section level2">
+<h2>5. GLU_H.xpt</h2>
+<p>Kept: - <code>LBDGLUSI</code> - Fasting Glucose (mmol/L) - blood
+sugar level</p>
+<p>Removed: - <code>LBXGLU</code> - Fasting Glucose (mg/dL) -
+<code>WTSAF2YR</code> - Fasting Subsample 2 Year MEC Weight -
+<code>PHAFSTHR</code> - Total length of food fast, hours -
+<code>PHAFSTMN</code> - Total length of food fast, minutes</p>
 </div>
+<div id="ins_h.xpt" class="section level2">
+<h2>6. INS_H.xpt</h2>
+<p>Kept: - <code>LBDINSI</code> - Insulin (pmol/L) - fasting insulin
+level</p>
+<p>Removed: - <code>LBXIN</code> - Insulin (uU/mL) -
+<code>WTSAF2YR</code> - Fasting Subsample MEC Weight -
+<code>PHAFSTHR</code> - Total length of food fast, hours -
+<code>PHAFSTMN</code> - Total length of food fast, minutes</p>
 </div>
-<div id="section-2-after-resampling" class="section level2">
-<h2>Section 2: After Resampling</h2>
-<p>Use this section for experiments after the same targeted MCI
-oversampling rule was applied to <code>age 65-69</code>,
-<code>education 4</code>, and <code>education 5</code>. Rows added are
-<code>324</code> for all runs.</p>
-<p>For the rerun resampling experiments below, class weights were
-removed (<code>1.0 / 1.0</code>) because MCI cases were already
-upweighted through targeted oversampling.</p>
-<table>
-<colgroup>
-<col width="3%" />
-<col width="3%" />
-<col width="3%" />
-<col width="3%" />
-<col width="3%" />
-<col width="4%" />
-<col width="4%" />
-<col width="4%" />
-<col width="4%" />
-<col width="4%" />
-<col width="4%" />
-<col width="4%" />
-<col width="4%" />
-<col width="4%" />
-<col width="4%" />
-<col width="4%" />
-<col width="4%" />
-<col width="4%" />
-<col width="4%" />
-<col width="4%" />
-<col width="4%" />
-<col width="3%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Exp ID</th>
-<th>Data Version</th>
-<th>Feature Set</th>
-<th>Resampling Rule</th>
-<th>Model</th>
-<th align="right">Class Threshold</th>
-<th align="right">Train Size</th>
-<th align="right">Test Size</th>
-<th align="right">MCI % Train</th>
-<th align="right">MCI % Test</th>
-<th align="right">Accuracy</th>
-<th align="right">Precision</th>
-<th align="right">Recall</th>
-<th align="right">Specificity</th>
-<th align="right">F1</th>
-<th align="right">ROC-AUC</th>
-<th align="right">Log Loss</th>
-<th align="right">TP</th>
-<th align="right">FP</th>
-<th align="right">TN</th>
-<th align="right">FN</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>A1</td>
-<td><code>cleaned_data_resampled.RData</code></td>
-<td>reduced feature set (<code>24</code> vars: <code>10</code> labs +
-<code>5</code> demographics + <code>9</code> physical/examination
-vars)</td>
-<td>Targeted MCI oversampling</td>
-<td>Random Forest</td>
-<td align="right">best_t = 0.647</td>
-<td align="right">1580</td>
-<td align="right">310</td>
-<td align="right">60.8</td>
-<td align="right">50.0</td>
-<td align="right">0.652</td>
-<td align="right">0.737</td>
-<td align="right">0.471</td>
-<td align="right">0.832</td>
-<td align="right">0.575</td>
-<td align="right">0.767</td>
-<td align="right"></td>
-<td align="right">73</td>
-<td align="right">26</td>
-<td align="right">129</td>
-<td align="right">82</td>
-<td>optimal <code>mtry=11</code>; <code>ntree=500</code>;
-type=<code>classification</code>; variables tried at each
-split=<code>11</code>; OOB error=<code>0.2177</code> (21.77%); OOB class
-error <code>No_MCI=0.4581</code>, <code>MCI=0.0625</code>; class weights
-removed (<code>1.0/1.0</code>); best_t from CV=<code>0.647</code>;
-accuracy at <code>0.50=0.7097</code></td>
-</tr>
-<tr class="even">
-<td>A2</td>
-<td><code>cleaned_data_resampled.RData</code></td>
-<td>cleaned full feature set (<code>68</code> vars)</td>
-<td>Targeted MCI oversampling</td>
-<td>Random Forest</td>
-<td align="right">best_t = 0.667</td>
-<td align="right">1580</td>
-<td align="right">310</td>
-<td align="right">60.8</td>
-<td align="right">50.0</td>
-<td align="right">0.661</td>
-<td align="right">0.879</td>
-<td align="right">0.374</td>
-<td align="right">0.948</td>
-<td align="right">0.525</td>
-<td align="right">0.777</td>
-<td align="right"></td>
-<td align="right">58</td>
-<td align="right">8</td>
-<td align="right">147</td>
-<td align="right">97</td>
-<td>optimal <code>mtry=24</code>; <code>ntree=500</code>;
-type=<code>classification</code>; variables tried at each
-split=<code>24</code>; OOB error=<code>0.2089</code> (20.89%); OOB class
-error <code>No_MCI=0.4742</code>, <code>MCI=0.0375</code>; class weights
-removed (<code>1.0/1.0</code>); best_t from CV=<code>0.667</code>;
-accuracy at <code>0.50=0.6968</code></td>
-</tr>
-<tr class="odd">
-<td>A3</td>
-<td><code>cleaned_data_resampled.RData</code></td>
-<td>cleaned full feature set (<code>68</code> vars)</td>
-<td>Targeted MCI oversampling</td>
-<td>XGBoost</td>
-<td align="right">best_t = 0.7537</td>
-<td align="right">1580</td>
-<td align="right">310</td>
-<td align="right">60.8</td>
-<td align="right">50.0</td>
-<td align="right">0.671</td>
-<td align="right">0.805</td>
-<td align="right">0.452</td>
-<td align="right">0.890</td>
-<td align="right">0.579</td>
-<td align="right">0.752</td>
-<td align="right">0.1158</td>
-<td align="right">70</td>
-<td align="right">17</td>
-<td align="right">138</td>
-<td align="right">85</td>
-<td>best_nrounds=<code>239</code>;
-objective=<code>binary:logistic</code>;
-eval_metric=<code>logloss</code>; lambda=<code>1</code>;
-seed=<code>123</code>; max_depth=<code>5</code>; eta=<code>0.05</code>;
-subsample=<code>0.8</code>; colsample_bytree=<code>0.8</code>;
-min_child_weight=<code>1</code>; gamma=<code>0.1</code>; CV mean
-logloss=<code>0.4849</code>; CV SD=<code>0.0375</code>; CV
-variance=<code>0.00141</code>; best_t from CV=<code>0.7537</code>;
-accuracy at <code>0.50=0.6613</code>; train logloss=<code>0.1158</code>;
-train acc=<code>1.0000</code>; train confusion matrix
-TN=<code>620</code>, FN=<code>0</code>, FP=<code>0</code>,
-TP=<code>960</code>; class weights removed (<code>1.0/1.0</code>)</td>
-</tr>
-<tr class="even">
-<td>A4</td>
-<td><code>cleaned_data_resampled.RData</code></td>
-<td>reduced feature set (<code>44</code> vars: <code>30</code> labs +
-<code>5</code> demographics + <code>9</code> physical/examination
-vars)</td>
-<td>Targeted MCI oversampling</td>
-<td>XGBoost</td>
-<td align="right">best_t = 0.7122</td>
-<td align="right">1580</td>
-<td align="right">310</td>
-<td align="right">60.8</td>
-<td align="right">50.0</td>
-<td align="right">0.687</td>
-<td align="right">0.784</td>
-<td align="right">0.516</td>
-<td align="right">0.858</td>
-<td align="right">0.623</td>
-<td align="right">0.757</td>
-<td align="right">0.1151</td>
-<td align="right">80</td>
-<td align="right">22</td>
-<td align="right">133</td>
-<td align="right">75</td>
-<td>best_nrounds=<code>134</code>;
-objective=<code>binary:logistic</code>;
-eval_metric=<code>logloss</code>; lambda=<code>1</code>;
-seed=<code>123</code>; max_depth=<code>5</code>; eta=<code>0.1</code>;
-subsample=<code>0.8</code>; colsample_bytree=<code>0.8</code>;
-min_child_weight=<code>1</code>; gamma=<code>0.1</code>; CV mean
-logloss=<code>0.4841</code>; CV SD=<code>0.0330</code>; CV
-variance=<code>0.00109</code>; best_t from CV=<code>0.7122</code>;
-accuracy at <code>0.50=0.6806</code>; train logloss=<code>0.1151</code>;
-train acc=<code>1.0000</code>; train confusion matrix
-TN=<code>620</code>, FN=<code>0</code>, FP=<code>0</code>,
-TP=<code>960</code>; class weights removed (<code>1.0/1.0</code>)</td>
-</tr>
-</tbody>
-</table>
+<div id="trigly_h.xpt" class="section level2">
+<h2>7. TRIGLY_H.xpt</h2>
+<p>Kept: - <code>LBDTRSI</code> - Triglyceride (mmol/L) - blood
+triglyceride level - <code>LBDLDLSI</code> - LDL-cholesterol (mmol/L) -
+LDL cholesterol level</p>
+<p>Removed: - <code>LBXTR</code> - Triglyceride (mg/dL) -
+<code>LBDLDL</code> - LDL-cholesterol (mg/dL) - <code>WTSAF2YR</code> -
+Fasting Subsample 2 Year MEC Weight</p>
 </div>
-<div id="group-level-fairness-detail" class="section level2">
-<h2>Group-Level Fairness Detail</h2>
-<p>Use a separate small table for each important experiment if you need
-per-group values.</p>
-<p>Selected final model: <code>B3</code>.</p>
-<table style="width:100%;">
-<colgroup>
-<col width="7%" />
-<col width="7%" />
-<col width="7%" />
-<col width="10%" />
-<col width="10%" />
-<col width="10%" />
-<col width="10%" />
-<col width="10%" />
-<col width="10%" />
-<col width="10%" />
-<col width="7%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Exp ID</th>
-<th>Demographic</th>
-<th>Group</th>
-<th align="right">N</th>
-<th align="right">Selection</th>
-<th align="right">TPR</th>
-<th align="right">FPR</th>
-<th align="right">DPD</th>
-<th align="right">EOD</th>
-<th align="right">FPR Diff</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>B3</td>
-<td>Age</td>
-<td>60-64</td>
-<td align="right">101</td>
-<td align="right">0.386</td>
-<td align="right">0.636</td>
-<td align="right">0.265</td>
-<td align="right">0.521</td>
-<td align="right">0.346</td>
-<td align="right">0.441</td>
-<td>Lower selection than older groups</td>
-</tr>
-<tr class="even">
-<td>B3</td>
-<td>Age</td>
-<td>65-69</td>
-<td align="right">72</td>
-<td align="right">0.500</td>
-<td align="right">0.625</td>
-<td align="right">0.344</td>
-<td align="right">0.521</td>
-<td align="right">0.346</td>
-<td align="right">0.441</td>
-<td>Mid-range selection and error rates</td>
-</tr>
-<tr class="odd">
-<td>B3</td>
-<td>Age</td>
-<td>70-74</td>
-<td align="right">56</td>
-<td align="right">0.625</td>
-<td align="right">0.778</td>
-<td align="right">0.483</td>
-<td align="right">0.521</td>
-<td align="right">0.346</td>
-<td align="right">0.441</td>
-<td>Higher FPR than younger groups</td>
-</tr>
-<tr class="even">
-<td>B3</td>
-<td>Age</td>
-<td>75-79</td>
-<td align="right">38</td>
-<td align="right">0.789</td>
-<td align="right">0.857</td>
-<td align="right">0.706</td>
-<td align="right">0.521</td>
-<td align="right">0.346</td>
-<td align="right">0.441</td>
-<td>High selection and high FPR</td>
-</tr>
-<tr class="odd">
-<td>B3</td>
-<td>Age</td>
-<td>80+</td>
-<td align="right">43</td>
-<td align="right">0.907</td>
-<td align="right">0.971</td>
-<td align="right">0.667</td>
-<td align="right">0.521</td>
-<td align="right">0.346</td>
-<td align="right">0.441</td>
-<td>Highest selection, near-max TPR</td>
-</tr>
-<tr class="even">
-<td>B3</td>
-<td>Education</td>
-<td>Level 1</td>
-<td align="right">25</td>
-<td align="right">1.000</td>
-<td align="right">1.000</td>
-<td align="right">1.000</td>
-<td align="right">0.725</td>
-<td align="right">0.561</td>
-<td align="right">0.860</td>
-<td>Extreme over-selection</td>
-</tr>
-<tr class="odd">
-<td>B3</td>
-<td>Education</td>
-<td>Level 2</td>
-<td align="right">41</td>
-<td align="right">0.902</td>
-<td align="right">0.931</td>
-<td align="right">0.833</td>
-<td align="right">0.725</td>
-<td align="right">0.561</td>
-<td align="right">0.860</td>
-<td>Very high FPR</td>
-</tr>
-<tr class="even">
-<td>B3</td>
-<td>Education</td>
-<td>Level 3</td>
-<td align="right">78</td>
-<td align="right">0.782</td>
-<td align="right">0.900</td>
-<td align="right">0.658</td>
-<td align="right">0.725</td>
-<td align="right">0.561</td>
-<td align="right">0.860</td>
-<td>High selection and FPR</td>
-</tr>
-<tr class="odd">
-<td>B3</td>
-<td>Education</td>
-<td>Level 4</td>
-<td align="right">91</td>
-<td align="right">0.275</td>
-<td align="right">0.439</td>
-<td align="right">0.140</td>
-<td align="right">0.725</td>
-<td align="right">0.561</td>
-<td align="right">0.860</td>
-<td>Strong under-detection</td>
-</tr>
-<tr class="even">
-<td>B3</td>
-<td>Education</td>
-<td>Level 5</td>
-<td align="right">75</td>
-<td align="right">0.413</td>
-<td align="right">0.636</td>
-<td align="right">0.321</td>
-<td align="right">0.725</td>
-<td align="right">0.561</td>
-<td align="right">0.860</td>
-<td>Lower selection than Levels 1-3</td>
-</tr>
-<tr class="odd">
-<td>B3</td>
-<td>Gender</td>
-<td>Male</td>
-<td align="right">163</td>
-<td align="right">0.644</td>
-<td align="right">0.791</td>
-<td align="right">0.458</td>
-<td align="right">0.141</td>
-<td align="right">0.072</td>
-<td align="right">0.121</td>
-<td>Slightly higher selection and FPR</td>
-</tr>
-<tr class="even">
-<td>B3</td>
-<td>Gender</td>
-<td>Female</td>
-<td align="right">147</td>
-<td align="right">0.503</td>
-<td align="right">0.719</td>
-<td align="right">0.337</td>
-<td align="right">0.141</td>
-<td align="right">0.072</td>
-<td align="right">0.121</td>
-<td>Smaller gender gap than other demographics</td>
-</tr>
-<tr class="odd">
-<td>B3</td>
-<td>Race</td>
-<td>Code 1</td>
-<td align="right">41</td>
-<td align="right">0.634</td>
-<td align="right">0.824</td>
-<td align="right">0.500</td>
-<td align="right">0.249</td>
-<td align="right">0.099</td>
-<td align="right">0.376</td>
-<td>Higher TPR with elevated FPR</td>
-</tr>
-<tr class="even">
-<td>B3</td>
-<td>Race</td>
-<td>Code 2</td>
-<td align="right">24</td>
-<td align="right">0.667</td>
-<td align="right">0.765</td>
-<td align="right">0.429</td>
-<td align="right">0.249</td>
-<td align="right">0.099</td>
-<td align="right">0.376</td>
-<td>Higher selection than most race groups</td>
-</tr>
-<tr class="odd">
-<td>B3</td>
-<td>Race</td>
-<td>Code 3</td>
-<td align="right">162</td>
-<td align="right">0.475</td>
-<td align="right">0.725</td>
-<td align="right">0.290</td>
-<td align="right">0.249</td>
-<td align="right">0.099</td>
-<td align="right">0.376</td>
-<td>Lowest selection among larger groups</td>
-</tr>
-<tr class="even">
-<td>B3</td>
-<td>Race</td>
-<td>Code 4</td>
-<td align="right">58</td>
-<td align="right">0.724</td>
-<td align="right">0.795</td>
-<td align="right">0.579</td>
-<td align="right">0.249</td>
-<td align="right">0.099</td>
-<td align="right">0.376</td>
-<td>Highest FPR among race groups</td>
-</tr>
-<tr class="odd">
-<td>B3</td>
-<td>Race</td>
-<td>Code 6</td>
-<td align="right">25</td>
-<td align="right">0.720</td>
-<td align="right">0.769</td>
-<td align="right">0.667</td>
-<td align="right">0.249</td>
-<td align="right">0.099</td>
-<td align="right">0.376</td>
-<td>Small group with very high FPR</td>
-</tr>
-<tr class="even">
-<td>B3</td>
-<td>Marital</td>
-<td>Married</td>
-<td align="right">175</td>
-<td align="right">0.589</td>
-<td align="right">0.759</td>
-<td align="right">0.435</td>
-<td align="right">0.214</td>
-<td align="right">0.233</td>
-<td align="right">0.731</td>
-<td>Largest group, mid-range performance</td>
-</tr>
-<tr class="odd">
-<td>B3</td>
-<td>Marital</td>
-<td>Widowed</td>
-<td align="right">56</td>
-<td align="right">0.607</td>
-<td align="right">0.833</td>
-<td align="right">0.346</td>
-<td align="right">0.214</td>
-<td align="right">0.233</td>
-<td align="right">0.731</td>
-<td>Higher TPR with moderate FPR</td>
-</tr>
-<tr class="even">
-<td>B3</td>
-<td>Marital</td>
-<td>Divorced</td>
-<td align="right">50</td>
-<td align="right">0.500</td>
-<td align="right">0.750</td>
-<td align="right">0.269</td>
-<td align="right">0.214</td>
-<td align="right">0.233</td>
-<td align="right">0.731</td>
-<td>Lower selection than married/widowed</td>
-</tr>
-<tr class="odd">
-<td>B3</td>
-<td>Marital</td>
-<td>Separated</td>
-<td align="right">7</td>
-<td align="right">0.714</td>
-<td align="right">0.750</td>
-<td align="right">0.667</td>
-<td align="right">0.214</td>
-<td align="right">0.233</td>
-<td align="right">0.731</td>
-<td>Very small group, unstable</td>
-</tr>
-<tr class="even">
-<td>B3</td>
-<td>Marital</td>
-<td>Never married</td>
-<td align="right">16</td>
-<td align="right">0.500</td>
-<td align="right">0.667</td>
-<td align="right">0.286</td>
-<td align="right">0.214</td>
-<td align="right">0.233</td>
-<td align="right">0.731</td>
-<td>Small group, lower TPR than top groups</td>
-</tr>
-<tr class="odd">
-<td>B3</td>
-<td>Marital</td>
-<td>Living with partner</td>
-<td align="right">6</td>
-<td align="right">0.667</td>
-<td align="right">0.600</td>
-<td align="right">1.000</td>
-<td align="right">0.214</td>
-<td align="right">0.233</td>
-<td align="right">0.731</td>
-<td>Very small group, extreme FPR</td>
-</tr>
-</tbody>
-</table>
+<div id="hdl_h.xpt" class="section level2">
+<h2>8. HDL_H.xpt</h2>
+<p>Kept: - <code>LBDHDDSI</code> - Direct HDL-Cholesterol (mmol/L) - HDL
+cholesterol level</p>
+<p>Removed: - <code>LBDHDD</code> - Direct HDL-Cholesterol (mg/dL)</p>
 </div>
-<div id="final-model-only" class="section level2">
-<h2>Final Model Only</h2>
-<p>Do not use this for every experiment. Fill this only for the selected
-final model.</p>
-<table style="width:100%;">
-<colgroup>
-<col width="13%" />
-<col width="13%" />
-<col width="18%" />
-<col width="13%" />
-<col width="13%" />
-<col width="13%" />
-<col width="13%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Final Model ID</th>
-<th>Calibration Checked?</th>
-<th align="right">Brier Score</th>
-<th>Calibration Plot Saved</th>
-<th>SHAP Done?</th>
-<th>LIME Done?</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>B3</td>
-<td>Yes</td>
-<td align="right">0.207</td>
-<td>Yes</td>
-<td></td>
-<td></td>
-<td>ECE=<code>0.0645</code>; wrongly overconfident
-predictions=<code>0.3%</code>; SHAP and LIME entries still need to be
-refreshed for <code>B3</code>.</td>
-</tr>
-</tbody>
-</table>
+<div id="tchol_h.xpt" class="section level2">
+<h2>9. TCHOL_H.xpt</h2>
+<p>Kept: - <code>LBDTCSI</code> - Total Cholesterol (mmol/L) - total
+blood cholesterol level</p>
+<p>Removed: - <code>LBXTC</code> - Total Cholesterol (mg/dL)</p>
 </div>
+<div id="cusezn_h.xpt" class="section level2">
+<h2>10. CUSEZN_H.xpt</h2>
+<p>Kept: - <code>LBDSCUSI</code> - Serum Copper (umol/L) - copper status
+- <code>LBDSSESI</code> - Serum Selenium (umol/L) - selenium status -
+<code>LBDSZNSI</code> - Serum Zinc (umol/L) - zinc status</p>
+<p>Removed: - <code>LBXSCU</code> - Serum Copper (ug/dL) -
+<code>LBXSSE</code> - Serum Selenium (ug/L) - <code>LBXSZN</code> -
+Serum Zinc (ug/dL) - <code>WTSA2YR</code> - Subsample A weights -
+<code>URXUCR</code> - Urinary creatinine (mg/dL)</p>
+</div>
+<div id="folate_h.xpt" class="section level2">
+<h2>11. FOLATE_H.xpt</h2>
+<p>Kept: - <code>LBDRFOSI</code> - RBC folate (nmol/L) - folate
+status</p>
+<p>Removed: - <code>LBDRFO</code> - RBC folate (ng/mL)</p>
+</div>
+<div id="alb_cr_h.xpt" class="section level2">
+<h2>12. ALB_CR_H.xpt</h2>
+<p>Kept: - <code>URDACT</code> - Albumin creatinine ratio (mg/g) - urine
+albumin-to-creatinine ratio, kidney/vascular marker</p>
+<p>Removed: - <code>URXUMA</code> - Albumin, urine (ug/mL) -
+<code>URXUMS</code> - Albumin, urine (mg/L) - <code>URXUCR</code> -
+Creatinine, urine (mg/dL) - <code>URXCRS</code> - Creatinine, urine
+(umol/L)</p>
+</div>
+<div id="vid_h.xpt" class="section level2">
+<h2>13. VID_H.xpt</h2>
+<p>Kept: - <code>LBXVIDMS</code> - 25OHD2+25OHD3 (nmol/L) - total
+vitamin D - <code>LBXVE3MS</code> - epi-25OHD3 (nmol/L) - vitamin D3
+epimer</p>
+<p>Removed: - <code>LBXVD2MS</code> - 25OHD2 (nmol/L) -
+<code>LBXVD3MS</code> - 25OHD3 (nmol/L) - <code>LBDVIDLC</code> -
+25OHD2+25OHD3 comment code - <code>LBDVD2LC</code> - 25OHD2 comment code
+- <code>LBDVD3LC</code> - 25OHD3 comment code - <code>LBDVE3LC</code> -
+epi-25OHD3 comment code</p>
+</div>
+<div id="pbcd_h.xpt" class="section level2">
+<h2>14. PBCD_H.xpt</h2>
+<p>Kept: - <code>LBDPBBSI</code> - Blood lead (umol/L) - lead exposure -
+<code>LBDBCDSI</code> - Blood cadmium (umol/L) - cadmium exposure -
+<code>LBDTHGSI</code> - Blood mercury, total (nmol/L) - mercury exposure
+- <code>LBDBSESI</code> - Blood selenium (umol/L) - selenium status -
+<code>LBDBMNSI</code> - Blood manganese (umol/L) - manganese status</p>
+<p>Removed: - <code>LBXBPB</code> - Blood lead (ug/dL) -
+<code>LBXBCD</code> - Blood cadmium (ug/L) - <code>LBXTHG</code> - Blood
+mercury, total (ug/L) - <code>LBXBSE</code> - Blood selenium (ug/L) -
+<code>LBXBMN</code> - Blood manganese (ug/L) - <code>LBDPBBLC</code> -
+Blood lead comment code - <code>LBDBCDLC</code> - Blood cadmium comment
+code - <code>LBDTHGLC</code> - Blood mercury, total comment code -
+<code>LBDBSELC</code> - Blood selenium comment code -
+<code>LBDBMNLC</code> - Blood manganese comment code -
+<code>WTSH2YR</code> - Blood metal weights</p>
+</div>
+<div id="cbc_h.xpt" class="section level2">
+<h2>15. CBC_H.xpt</h2>
+<p>Kept: - <code>LBXWBCSI</code> - White blood cell count (1000
+cells/uL) - inflammation / immune marker - <code>LBXLYPCT</code> -
+Lymphocyte percent (%) - white cell differential - <code>LBXMOPCT</code>
+- Monocyte percent (%) - white cell differential - <code>LBXNEPCT</code>
+- Segmented neutrophils percent (%) - white cell differential -
+<code>LBXEOPCT</code> - Eosinophils percent (%) - white cell
+differential - <code>LBXBAPCT</code> - Basophils percent (%) - white
+cell differential - <code>LBDLYMNO</code> - Lymphocyte number (1000
+cells/uL) - white cell count subtype - <code>LBDMONO</code> - Monocyte
+number (1000 cells/uL) - white cell count subtype - <code>LBDNENO</code>
+- Segmented neutrophils number (1000 cells/uL) - white cell count
+subtype - <code>LBDEONO</code> - Eosinophils number (1000 cells/uL) -
+white cell count subtype - <code>LBDBANO</code> - Basophils number (1000
+cells/uL) - white cell count subtype - <code>LBXRBCSI</code> - Red blood
+cell count (million cells/uL) - red blood cell count -
+<code>LBXHGB</code> - Hemoglobin (g/dL) - oxygen-carrying marker -
+<code>LBXHCT</code> - Hematocrit (%) - red blood cell volume fraction -
+<code>LBXMCVSI</code> - Mean cell volume (fL) - red blood cell size -
+<code>LBXMCHSI</code> - Mean cell hemoglobin (pg) - hemoglobin per red
+cell - <code>LBXMC</code> - MCHC (g/dL) - mean cell hemoglobin
+concentration - <code>LBXRDW</code> - Red cell distribution width (%) -
+red blood cell size variability - <code>LBXPLTSI</code> - Platelet count
+(1000 cells/uL) - platelet count - <code>LBXMPSI</code> - Mean platelet
+volume (fL) - platelet size</p>
+</div>
+<div id="biopro_h.xpt" class="section level2">
+<h2>16. BIOPRO_H.xpt</h2>
+<p>Kept: - <code>LBDSALSI</code> - Albumin (g/L) - serum albumin /
+nutritional and liver-kidney marker - <code>LBXSAPSI</code> - Alkaline
+phosphatase (IU/L) - liver/bone enzyme - <code>LBXSASSI</code> -
+Aspartate aminotransferase AST (U/L) - liver enzyme -
+<code>LBXSATSI</code> - Alanine aminotransferase ALT (U/L) - liver
+enzyme - <code>LBDSBUSI</code> - Blood urea nitrogen (mmol/L) - kidney
+function marker - <code>LBXSC3SI</code> - Bicarbonate (mmol/L) -
+acid-base / metabolic marker - <code>LBDSCASI</code> - Total calcium
+(mmol/L) - calcium status - <code>LBDSCRSI</code> - Creatinine (umol/L)
+- kidney function marker - <code>LBDSGBSI</code> - Globulin (g/L) -
+protein / inflammation-related marker - <code>LBXSGTSI</code> - Gamma
+glutamyl transferase (U/L) - liver enzyme - <code>LBDSIRSI</code> -
+Iron, refrigerated serum (umol/L) - iron status</p>
+<p>Removed: - <code>LBXSAL</code> - Albumin (g/dL) - <code>LBXSBU</code>
+- Blood urea nitrogen (mg/dL) - <code>LBXSCA</code> - Total calcium
+(mg/dL) - <code>LBXSCH</code> - Cholesterol (mg/dL) -
+<code>LBDSCHSI</code> - Cholesterol (mmol/L) - <code>LBXSCR</code> -
+Creatinine (mg/dL) - <code>LBXSGB</code> - Globulin (g/dL) -
+<code>LBXSGL</code> - Glucose, refrigerated serum (mg/dL) -
+<code>LBDSGLSI</code> - Glucose, refrigerated serum (mmol/L) -
+<code>LBXSIR</code> - Iron, refrigerated serum (ug/dL) -
+<code>LBXSCK</code> - Creatine phosphokinase CPK (IU/L) -
+<code>LBXSCLSI</code> - Chloride (mmol/L) - <code>LBXSKSI</code> -
+Potassium (mmol/L) - <code>LBXSLDSI</code> - Lactate dehydrogenase (U/L)
+- <code>LBXSNASI</code> - Sodium (mmol/L)</p>
 </div>
 
 
