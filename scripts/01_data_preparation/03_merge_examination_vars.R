@@ -1,9 +1,8 @@
 library(tidyverse)
 library(haven)
-library(janitor)
 library(dplyr)
 
-# 0) Load existing base_df_with_labs (demo + cog + labs)
+# Load existing base_df_with_labs (demo + cog + labs)
 base_df_with_labs <- read_csv("data/processed/dataframe/base_df_with_labs.csv")
 
 # 1) EXAMINATION DATA
@@ -39,8 +38,7 @@ grip_strength <- mgx_raw %>%
   select(SEQN, grip_strength = MGDCGSZ)
 
 # 2) QUESTIONNAIRE DATA
-
-#  Depression: PHQ-9 total + flag
+# Depression: PHQ-9 total + flag
 dpq <- read_xpt("data/raw/QUESTIONNAIRE_DATA/DPQ_H.xpt") %>%
   transmute(
     SEQN,

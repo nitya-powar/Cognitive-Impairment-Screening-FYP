@@ -2,31 +2,29 @@ library(ggplot2)
 library(dplyr)
 
 # ----------------------------------------------------------------------------------------
-# 1) Load predictions and actuals
+# Load predictions and labels
 # ----------------------------------------------------------------------------------------
 pred_prob <- readRDS('data/processed/RF_exports/pred_prob_RF.rds')
 test_y <- readRDS('data/processed/RF_exports/test_y_RF.rds')
 
 # ----------------------------------------------------------------------------------------
-# 2) Brier Score (Mean Squared Error of probabilities)
+# Overall calibration
 # ----------------------------------------------------------------------------------------
 brier_score <- mean((pred_prob - test_y)^2)
-cat("Brier Score:", round(brier_score, 3), "\n") # the lower the better. below 0.3 is generally considered good.
+cat("Brier Score:", round(brier_score, 3), "\n")
 
 # ----------------------------------------------------------------------------------------
-# 3) Calibration Plot (Reliability diagram)
+# Calibration curve
 # ----------------------------------------------------------------------------------------
 calibration_data <- data.frame(
   predicted_prob = pred_prob,
   actual = test_y
 )
 
-# Bin probabilities into deciles
 calibration_data$bin <- cut(calibration_data$predicted_prob, 
                             breaks = seq(0, 1, by = 0.2),
                             include.lowest = TRUE)
 
-# Calculate mean predicted vs actual per bin
 calibration_summary <- calibration_data %>%
   group_by(bin) %>%
   summarise(
@@ -50,9 +48,8 @@ calibration_plot <- ggplot(calibration_summary, aes(x = mean_predicted, y = mean
 print(calibration_plot)
 
 # ----------------------------------------------------------------------------------------
-# 4) Over/Under-confidence analysis
+# Confidence checks
 # ----------------------------------------------------------------------------------------
-# Expected Calibration Error (ECE)
 ece <- calibration_summary %>%
   mutate(weight = n / sum(n),
          error = abs(mean_predicted - mean_actual)) %>%
@@ -61,32 +58,28 @@ ece <- calibration_summary %>%
 
 cat("\nExpected Calibration Error (ECE):", round(ece, 4), "\n")
 
-# Better: Check if extreme predictions are CORRECT
 overconfident_wrong <- mean(
-  (pred_prob > 0.8 & test_y == 0) |  # Very sure of MCI but wrong
-    (pred_prob < 0.2 & test_y == 1)    # Very sure of No_MCI but wrong
+  (pred_prob > 0.8 & test_y == 0) |
+    (pred_prob < 0.2 & test_y == 1)
 )
 
-cat("\nPercentage of WRONGLY overconfident predictions:", 
+cat("\nWrongly overconfident predictions:", 
     round(overconfident_wrong * 100, 1), "%\n")
 
-# Also check calibration of extreme predictions separately
 high_conf <- pred_prob > 0.9
 if(sum(high_conf) > 0) {
-  cat("When predicting >90% MCI probability:\n")
-  cat("  Actual MCI rate:", round(mean(test_y[high_conf]), 3), "\n")
-  cat("  Should be close to 0.95+ for well-calibrated\n")
+  cat("When predicting >90% CI probability:\n")
+  cat("  Actual CI rate:", round(mean(test_y[high_conf]), 3), "\n")
 }
 
 low_conf <- pred_prob < 0.1  
 if(sum(low_conf) > 0) {
-  cat("When predicting <10% MCI probability:\n")
-  cat("  Actual MCI rate:", round(mean(test_y[low_conf]), 3), "\n")
-  cat("  Should be close to 0.05- for well-calibrated\n")
+  cat("When predicting <10% CI probability:\n")
+  cat("  Actual CI rate:", round(mean(test_y[low_conf]), 3), "\n")
 }
 
 # ----------------------------------------------------------------------------------------
-# 5) Save results
+# Save results
 # ----------------------------------------------------------------------------------------
 calibration_results <- list(
   brier_score = brier_score,
@@ -98,6 +91,5 @@ calibration_results <- list(
 saveRDS(calibration_results, 
         'outputs/figures/calibration/calibration_results.rds')
 
-# Save plot
 ggsave('outputs/figures/calibration/calibration_curve.png',
        calibration_plot, width = 8, height = 6, dpi = 300)

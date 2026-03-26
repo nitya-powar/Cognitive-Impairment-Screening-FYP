@@ -1,24 +1,19 @@
-library(ggplot2)
 library(naniar)
-library(caret)
 library(dplyr)
 
-# ----------------------------------------------------------------------
-# 1. LOAD DATA
-# ----------------------------------------------------------------------
+# Load the merged dataset
 df <- read.csv("data/processed/dataframe/final_dataframe.csv")
 
-# Convert target variable to factor for classification (0 = normal, 1 = MCI)
+# Treat the outcome as a binary classification label
 df$cog_impair <- factor(df$cog_impair, levels = c(0, 1))
 
 # ----------------------------------------------------------------------
-# 2. EXPLORE MISSINGNESS PATTERNS (BEFORE CLEANING DATA)
+# Missingness before cleaning
 # ----------------------------------------------------------------------
-# Exclude ID/demo/label columns from missingness summaries
+# Summarise missingness in the predictor set before cleaning
 missingness_vars <- c("SEQN", "age_years", "gender", "race", "education_level", "marital_status", "cog_impair")
 feature_df <- df[, !(names(df) %in% missingness_vars)]
 
-# Create summary table - FIXED
 missing_table <- miss_var_summary(feature_df) %>%
   filter(pct_miss > 0) %>%
   mutate(
@@ -27,15 +22,11 @@ missing_table <- miss_var_summary(feature_df) %>%
   ) %>%
   as.data.frame()
 
-# Print summary
-cat("Total variables with missing data:", nrow(missing_table), "\n") # --------- some vars had alot of missing data, so entire groupds were removed, no point of showing in background chapter
+cat("Total variables with missing data:", nrow(missing_table), "\n")
 cat("Mean missingness:", round(mean(missing_table$pct_miss), 1), "%\n")
 print(head(missing_table)) 
 
-# ----------------------------------------------------------------------
-# 3. CHECK IF MISSINGNESS IS RELATED TO DEMOGRAPHICS
-# ----------------------------------------------------------------------
-# Simple observed-variable association checks using overall feature missingness
+# Check whether missingness is associated with demographics
 df$high_missingness <- rowMeans(is.na(feature_df)) > 0.1
 
 cat("\n=== OBSERVED-VARIABLE ASSOCIATION CHECKS ===\n")
@@ -47,29 +38,27 @@ cat("Marital status p-value:", chisq.test(table(df$marital_status, df$high_missi
 df$high_missingness <- NULL
 
 # ----------------------------------------------------------------------
-# 4. CLEAN DATA BASED ON MISSINGNESS ANALYSIS
+# Clean the dataset
 # ----------------------------------------------------------------------
-# Remove columns with >=60% missing values (too sparse for modeling)
+# Remove columns that are too sparse for modeling
 final_cleaned_dataframe <- df[, colSums(is.na(df)) < nrow(df) * 0.6]
 print(paste("Removed", ncol(df) - ncol(final_cleaned_dataframe), "columns with >=60% missing"))
 drop_col <- c("SEQN")
 final_cleaned_dataframe <- final_cleaned_dataframe[, !(names(final_cleaned_dataframe) %in% drop_col)]
 
 # ----------------------------------------------------------------------
-# 5. VERIFY CLEANED DATA MISSINGNESS PATTERNS
+# Missingness after cleaning
 # ----------------------------------------------------------------------
-# Check missing percentage in cleaned dataset before split
+# Review missingness again after column removal
 print("Missingness after cleaning:")
 feature_final_cleaned_dataframe <- final_cleaned_dataframe[, !(names(final_cleaned_dataframe) %in% c("age_years", "gender", "race", "education_level", "marital_status", "cog_impair"))]
 print(miss_var_summary(feature_final_cleaned_dataframe))
 
-# Verify missingness after cleaning on full cleaned dataset
+# Calculate row-level missingness using the cleaned predictor set
 final_cleaned_dataframe$overall_missing_pct <- rowMeans(is.na(feature_final_cleaned_dataframe))
 final_cleaned_dataframe$high_missingness <- final_cleaned_dataframe$overall_missing_pct > 0.1
 
-# -----------------------------------------------------------------------
-# Test if missingness relates to demographics after cleaning
-# -----------------------------------------------------------------------
+# Recheck the demographic association after cleaning
 cat("\n=== ASSOCIATION CHECKS AFTER CLEANING ===\n")
 cat("Age p-value:", t.test(age_years ~ high_missingness, data = final_cleaned_dataframe)$p.value, "\n")
 cat("Gender p-value:", chisq.test(table(final_cleaned_dataframe$gender, final_cleaned_dataframe$high_missingness))$p.value, "\n")
@@ -81,8 +70,8 @@ final_cleaned_dataframe$overall_missing_pct <- NULL
 final_cleaned_dataframe$high_missingness <- NULL
 
 # ----------------------------------------------------------------------
-# 6. SAVE CLEANED DATA FOR SPLITTING
+# Save outputs
 # ----------------------------------------------------------------------
+# Save the cleaned dataset for the train/test split step
 write.csv(final_cleaned_dataframe, "data/processed/dataframe/final_cleaned_dataframe.csv", row.names = FALSE)
 saveRDS(final_cleaned_dataframe, "data/processed/dataframe/final_cleaned_dataframe.rds")
-print("Cleaned dataframe saved for separate train/test split.")

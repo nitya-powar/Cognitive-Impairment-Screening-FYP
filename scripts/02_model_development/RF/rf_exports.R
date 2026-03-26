@@ -1,0 +1,8 @@
+saveRDS(final_rf, "outputs/models/random_forest_model.rds")
+saveRDS(test_x_imp, "data/processed/RF_exports/test_x_imp_RF.rds")
+saveRDS(train_x_imp, "data/processed/RF_exports/train_x_imp_RF.rds")
+saveRDS(pred_prob, "data/processed/RF_exports/pred_prob_RF.rds")
+saveRDS(pred_class_5, "data/processed/RF_exports/pred_class_5_RF.rds") 
+saveRDS(pred_class_best_t, "data/processed/RF_exports/pred_class_best_t_RF.rds") 
+saveRDS(test_y, "data/processed/RF_exports/test_y_RF.rds")
+saveRDS(results,    "data/processed/RF_exports/results_test_RF.rds")

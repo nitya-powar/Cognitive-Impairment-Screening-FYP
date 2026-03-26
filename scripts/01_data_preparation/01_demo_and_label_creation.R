@@ -1,9 +1,6 @@
-library(tidyverse); 
-library(janitor); 
-library(ggplot2);
-library(haven);
-library(dplyr);
-library(dlookr)
+library(tidyverse)
+library(haven)
+library(dplyr)
 
 # 1. LOAD & CLEAN DEMOGRAPHICS
 demo <- read_xpt('data/raw/DEMO_H.xpt')

@@ -1,0 +1,7 @@
+saveRDS(xgb_model, "outputs/models/xgb_model.rds")
+saveRDS(train_x_imp, "data/processed/XGB_exports/train_x_imp.rds")
+saveRDS(test_x_imp, "data/processed/XGB_exports/test_x_imp.rds")
+saveRDS(results, "data/processed/XGB_exports/results_test.rds")
+saveRDS(pred_prob, "data/processed/XGB_exports/pred_prob.rds")
+saveRDS(pred_class_best_t, "data/processed/XGB_exports/pred_class_best_t.rds")
+saveRDS(test_y, "data/processed/XGB_exports/test_y.rds")

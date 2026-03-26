@@ -90,13 +90,13 @@ server <- function(input, output, session) {
     feature_order <- names(FEATURE_CASTERS)
     input_data <- build_input_data(input, feature_order)
     
-    risk_prob <- predict(random_forest_model, newdata = input_data, type = "prob")[, "MCI"]
+    risk_prob <- predict(random_forest_model, newdata = input_data, type = "prob")[, "CI"]
     risk_percent <- round(risk_prob * 100, 1)
     explanation <- lime::explain(
       x = input_data,
       explainer = lime_explainer,
       n_features = 8,
-      labels = "MCI"
+      labels = "CI"
     )
     
     # when this is updated, everything that reads prediction_state runs again

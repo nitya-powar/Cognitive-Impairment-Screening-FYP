@@ -4,8 +4,9 @@ library(dlookr)
 
 base_df <- read_rds("data/processed/dataframe/base_df.rds")
 
-
-drop_cols <- c( # not to drop seqn here
+# duplicate units, survey weights, comment codes, variables intentionally excluded - refer FEATURE_KEEP_REMOVE_TRACKER.md
+drop_cols <- c( 
+  # not to drop SEQN here
   "WTSSNH2Y", "SSNFLH", "SSNFLL", "LBDMMALC", "LBDB12",
   "LBXGLU", "WTSAF2YR", "WTSAF2YR.x", "WTSAF2YR.y",
   "PHAFSTHR", "PHAFSTHR.x", "PHAFSTHR.y",
@@ -22,17 +23,18 @@ drop_cols <- c( # not to drop seqn here
 )
 
 
-# 3. LOAD & MERGE ALL LAB DATA
+# LOAD & MERGE ALL LAB DATA
 lab_files <- list.files("data/raw/LAB_DATA", pattern = "\\.xpt$", full.names = TRUE)
 
 labs <- Reduce(function(x, y) full_join(x, y, by = "SEQN"), lapply(lab_files, read_xpt)) %>%
   distinct(SEQN, .keep_all = TRUE)
 
-# 4. CREATE FINAL MERGED DATASET & EXPORT
+# CREATE FINAL MERGED DATASET & EXPORT
 base_df_with_labs <- base_df %>%
   inner_join(labs, by = "SEQN") %>%
   select(-any_of(drop_cols))
 
+# GENERATE PARETO ANALYSIS
 png("outputs/figures/missing_data_pareto.png",
     width = 800, height = 600)
 plot_na_pareto(base_df_with_labs, only_na = TRUE)

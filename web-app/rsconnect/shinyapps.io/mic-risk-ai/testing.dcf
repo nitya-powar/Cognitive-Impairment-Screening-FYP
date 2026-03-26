@@ -5,6 +5,6 @@ account: mic-risk-ai
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 16857945
-bundleId: 11755937
+bundleId: 11763943
 url: https://mic-risk-ai.shinyapps.io/testing/
 version: 1
