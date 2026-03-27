@@ -26,7 +26,7 @@ All runs below use the same preprocessing rule: columns with `>=60%` missing dat
 This table compares reduced-feature Random Forest runs. Each run uses `14` fixed demographic/examination variables plus the stated number of top lab features.
 
 | Lab Features Kept | Total Features | Accuracy | Precision | Recall | Specificity | F1 | ROC-AUC | TP | FP | TN | FN |
-|------|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|
+|----|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | Top 40 labs | 54 | 0.684 | 0.694 | 0.658 | 0.710 | 0.675 | 0.768 | 102 | 45 | 110 | 53 |
 | Top 30 labs | 44 | 0.668 | 0.653 | 0.716 | 0.619 | 0.683 | 0.763 | 111 | 59 | 96 | 44 |
 | Top 20 labs | 34 | 0.681 | 0.689 | 0.658 | 0.703 | 0.673 | 0.769 | 102 | 46 | 109 | 53 |
@@ -37,7 +37,7 @@ This table compares reduced-feature Random Forest runs. Each run uses `14` fixed
 This table compares reduced-feature XGBoost runs. Each run uses `14` fixed demographic/examination variables plus the stated number of top lab features.
 
 | Lab Features Kept | Total Features | Accuracy | Precision | Recall | Specificity | F1 | ROC-AUC | TP | FP | TN | FN |
-|------|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|
+|----|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | Top 40 labs | 54 | 0.671 | 0.779 | 0.477 | 0.865 | 0.592 | 0.761 | 74 | 21 | 134 | 81 |
 | Top 30 labs | 44 | 0.706 | 0.703 | 0.716 | 0.697 | 0.709 | 0.776 | 111 | 47 | 108 | 44 |
 | Top 20 labs | 34 | 0.687 | 0.730 | 0.594 | 0.781 | 0.655 | 0.770 | 92 | 34 | 121 | 63 |
@@ -48,7 +48,7 @@ This table compares reduced-feature XGBoost runs. Each run uses `14` fixed demog
 This table compares subgroup fairness for the two main baseline models before any resampling decision was made. Values are shown as `B1 / B2`.
 
 | Demographic Group | Total | MCI | No MCI | Selection (B1 / B2) | TPR (B1 / B2) | FPR (B1 / B2) | DPD (B1 / B2) | EOD (B1 / B2) | Fairness Issue | Resample? |
-|-------|------:|------:|------:|-------|-------|-------|-------|-------|-------|-------|
+|----|---:|---:|---:|----|----|----|----|----|----|----|
 | Age: 60-64 | 101 | 33 | 68 | 0.248 / 0.139 | 0.515 / 0.273 | 0.118 / 0.0735 | 0.566 / 0.652 | 0.487 / 0.610 | Under-selected | No |
 | Age: 65-69 | 72 | 40 | 32 | 0.361 / 0.236 | 0.425 / 0.350 | 0.281 / 0.0938 | 0.566 / 0.652 | 0.487 / 0.610 | Consistent under-detection | Yes |
 | Age: 70-74 | 56 | 27 | 29 | 0.446 / 0.500 | 0.667 / 0.667 | 0.241 / 0.345 | 0.566 / 0.652 | 0.487 / 0.610 | Higher false positives | No |
@@ -78,7 +78,7 @@ This table compares subgroup fairness for the two main baseline models before an
 This table records the main feature-importance outputs for each baseline model.
 
 | Exp ID | Importance Metric | Top Features |
-|------------------------|------------------------|------------------------|
+|----|----|----|
 | B1 | Mean Decrease Gini | education_level, age_years, LBDBCDSI, LBDTCSI, LBDHDDSI, LBDSCRSI, LBDSGBSI, URDACT, grip_strength, LBXMMASI, LBXVIDMS, height, LBDGLUSI, weight, LBDTRSI, mean_dbp, LBXHCT, LBXPLTSI, LBXRDW, LBXHGB, LBDRFOSI, LBXVE3MS, LBDB12SI, LBDLDLSI, waist, mean_sbp, LBXSATSI, bmi, LBDSIRSI, LBXLYPCT, LBDBPBSI, LBXMCVSI, LBXGH, LBXMOPCT, LBDINSI, LBDBSESI, LBXRBCSI, LBXMCHSI, LBXNEPCT, LBDBMNSI, LBXSAPSI, LBDTHGSI, LBDSUASI, LBXWBCSI, LBXSGTSI, LBDSTPSI, LBDNENO, LBXMC, LBXMPSI, LBDLYMNO |
 | B2 | XGBoost importance | education_level, age_years, race, LBDSGBSI, LBXMMASI, LBDHDDSI, LBDBCDSI, phq9_sum, LBDTCSI, LBDTRSI, LBDSCRSI, LBXHGB, LBXPLTSI, URDACT, grip_strength, LBXSATSI, height, gender, bmi, LBDB12SI, LBXVIDMS, LBDGLUSI, LBXVE3MS, LBDSIRSI, LBXRDW, mean_sbp, LBXGH, LBXLYPCT, LBDSBUSI, LBDLDLSI, LBXMOPCT, LBDSALSI, LBDSPHSI, LBXMCVSI, LBXMPSI, LBXRBCSI, LBDBSESI, LBDSUASI, waist, LBXHCT, LBDLYMNO, weight, LBDINSI, LBXNEPCT, LBXSAPSI, LBDRFOSI, LBXSOSSI, LBDBMNSI, LBDSTPSI, LBXSGTSI, LBDBPBSI |
 | B3 | Mean Decrease Gini | age_years, education_level, LBDTCSI, URDACT, LBXMMASI, LBDSCRSI, LBDSGBSI, grip_strength, height, LBXVIDMS, mean_sbp, mean_dbp, LBDHDDSI, LBDBCDSI, LBDGLUSI, LBDTRSI, bmi, waist, weight, phq9_sum, race, marital_status, gender, phq9_depressed |
@@ -104,7 +104,7 @@ This table gives the detailed fairness results for the selected model.
 Selected final model: `B3`.
 
 | Exp ID | Demographic | Group | N | Selection | TPR | FPR | DPD | EOD | FPR Diff | Notes |
-|-------|-------|-------|------:|------:|------:|------:|------:|------:|------:|-------|
+|----|----|----|---:|---:|---:|---:|---:|---:|---:|----|
 | B3 | Age | 60-64 | 101 | 0.386 | 0.636 | 0.265 | 0.521 | 0.346 | 0.441 | Lower selection than older groups |
 | B3 | Age | 65-69 | 72 | 0.500 | 0.625 | 0.344 | 0.521 | 0.346 | 0.441 | Mid-range selection and error rates |
 | B3 | Age | 70-74 | 56 | 0.625 | 0.778 | 0.483 | 0.521 | 0.346 | 0.441 | Higher FPR than younger groups |
@@ -134,5 +134,5 @@ Selected final model: `B3`.
 This section is only for the final selected model.
 
 | Final Model ID | Calibration Checked? | Brier Score | Calibration Plot Saved | SHAP Done? | LIME Done? | Notes |
-|-----------|-----------|----------:|-----------|-----------|-----------|-----------|
+|----|----|---:|----|----|----|----|
 | B3 | Yes | 0.207 | Yes | Yes | Yes | ECE=`0.0645`; wrongly overconfident predictions=`0.3%`; SHAP and LIME entries still need to be refreshed for `B3`. |

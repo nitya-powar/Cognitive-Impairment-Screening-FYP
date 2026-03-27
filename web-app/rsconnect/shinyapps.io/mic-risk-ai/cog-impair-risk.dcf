@@ -1,0 +1,10 @@
+name: cog-impair-risk
+title:
+username: mic-risk-ai
+account: mic-risk-ai
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 16996848
+bundleId: 11767196
+url: https://nitya-fyp.shinyapps.io/cog-impair-risk/
+version: 1
